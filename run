@@ -1,0 +1,12 @@
+#!/bin/bash
+
+MAX_TRADE_SIZE=12
+
+./spherical_trades -b -u 6 > trades_4
+
+# There are no trades of size 5.
+
+for i in {8..$((MAX_TRADE_SIZE+2))}
+do
+    ./spherical_trades -b -u $i > trades_$(($i-2))
+done

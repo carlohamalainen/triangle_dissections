@@ -1,0 +1,12 @@
+#!/bin/bash
+
+MAX_TRADE_SIZE=12
+
+./spherical_trades_binary -b -u 6 > binary_spherical_bitrades_4
+
+# There are no trades of size 5.
+
+for i in {8..$((MAX_TRADE_SIZE+2))}
+do
+    ./spherical_trades_binary -b -u $i > binary_spherical_bitrades_$(($i-2))
+done

@@ -1,9 +1,23 @@
-This repo contains code that supports the paper "An enumeration of
-equilateral triangle dissections", Ales Drapal and Carlo Hamalainen,
-Discrete Applied Mathematics Volume 158, Issue 14, 28 July 2010,
-Pages 1479-1495. An open access (and more up to date version) is
-available on the arXiv: http://arxiv.org/abs/0910.5199
+spherical_trades.c is a plugin for plantri that produces spherical
+latin trades. Here is an example trade:
 
-Carlo Hamalainen <carlo.hamalainen@gmail.com>
+5 2 5
+10
+0 0 0
+0 1 1
+1 1 0
+1 0 2
+2 0 3
+3 0 4
+4 0 1
+4 1 4
+3 1 3
+2 1 2
 
-2011-05-28
+The first line says that there are 5 rows, 2 columns, and 5 symbols in
+the trade. The next line says that there are 10 entries in the trade
+(so 10 lines follow). Each of the next 10 lines is of the form x y z,
+meaning that symbol z appearas in the cell at row x, column y.
+
+spherical_trades_binary.c produces the same data but in packed
+binary format.
