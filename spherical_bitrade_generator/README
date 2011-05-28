@@ -1,0 +1,36 @@
+plantri.c is the plantri program by Gunnar Brinkmann and
+Brendan McKay. For the license and more information, see:
+http://cs.anu.edu.au/~bdm/plantri
+
+--------------------------------------------------------------------------------
+
+spherical_trades.c is a plugin for plantri that produces spherical
+latin trades. Here is an example trade:
+
+5 2 5
+10
+0 0 0
+0 1 1
+1 1 0
+1 0 2
+2 0 3
+3 0 4
+4 0 1
+4 1 4
+3 1 3
+2 1 2
+
+The first line says that there are 5 rows, 2 columns, and 5 symbols in
+the trade. The next line says that there are 10 entries in the trade
+(so 10 lines follow). Each of the next 10 lines is of the form x y z,
+meaning that symbol z appearas in the cell at row x, column y.
+
+--------------------------------------------------------------------------------
+
+spherical_trades_binary.c produces the same data but in packed
+binary format.
+
+--------------------------------------------------------------------------------
+
+Use the scripts 'run' or 'run_binary' to produce some bitrades up to
+size 12.
