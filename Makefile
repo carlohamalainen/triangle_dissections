@@ -8,3 +8,7 @@ $(SUBDIRS):
 	 $(MAKE) -C $@
 
 dissections-cpp: spherical_bitrade_generator
+
+clean :
+	-for d in $(SUBDIRS); do (cd $$d; $(MAKE) clean ); done
+

@@ -2,12 +2,10 @@
 
 # Test the spherical bitrade generator and the enumerator by counting all dissections up to size 12.
 
-cd spherical_bitrade_generator
-make
-cd ../dissections-cpp
 make
 
 # Run for sizes up to 12:
+cd dissections-cpp
 cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td > separated-signatures-4
 for i in {6..12}
 do
