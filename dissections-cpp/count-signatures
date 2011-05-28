@@ -1,0 +1,8 @@
+printf "%d %d\n" 4  `cat separated-signatures-4  | sort | uniq | wc -l`
+printf "%d %d\n" 6  `cat separated-signatures-6  | sort | uniq | wc -l`
+printf "%d %d\n" 7  `cat separated-signatures-7  | sort | uniq | wc -l`
+printf "%d %d\n" 8  `cat separated-signatures-8  | sort | uniq | wc -l`
+printf "%d %d\n" 9  `cat separated-signatures-9  | sort | uniq | wc -l`
+printf "%d %d\n" 10 `cat separated-signatures-10 | sort | uniq | wc -l`
+printf "%d %d\n" 11 `cat separated-signatures-11 | sort | uniq | wc -l`
+printf "%d %d\n" 12 `cat separated-signatures-12 | sort | uniq | wc -l`
