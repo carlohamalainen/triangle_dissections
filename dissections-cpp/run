@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cat binary_spherical_bitrades_4 | ./td > separated-signatures-4.bz2
+
+# There are no trades of size 5.
+
+for i in {6..16}
+do
+    echo $i
+    cat binary_spherical_bitrades_$i | ./td > separated-signatures-$i.bz2
+done
+
