@@ -1,46 +1,25 @@
 #!/bin/bash
 
-echo "Compiling spherical bitrade generator..."
-echo
+# Test the spherical bitrade generator and the enumerator by counting all dissections up to size 12.
 
 cd spherical_bitrade_generator
-./compile_binary
-
-echo
-echo "Generating spherical bitrades up to size 12..."
-echo
-
-./run_binary
-
-echo
-echo "Compiling C++ triangle dissection enumerator code..."
-echo
-
+make
 cd ../dissections-cpp
-./compile
+make
 
-echo
-echo "Enumerating dissections up to some fixed size (12?)..."
-echo
-
-./run
-
-echo
-echo "Counting canonical signatures..."
-echo
+# Run for sizes up to 12:
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td > separated-signatures-4
+for i in {6..12}
+do
+    echo $i
+    cat ../spherical_bitrade_generator/binary_spherical_bitrades_$i | ./td > separated-signatures-$i
+done
 
 ./count-signatures &> signature_counts_test_run.txt
-
-echo
-echo "Checking counts..."
-echo
-
 cmp signature_counts_test_run.txt signature_counts_known_correct.txt
 
 RETVAL=$?
 [ $RETVAL -eq 0 ] && echo "Success - all counts match:" && echo && cat signature_counts_test_run.txt 
 [ $RETVAL -ne 0 ] && echo "Fail! Compare signature_counts_test_run.txt and signature_counts_known_correct.txt"
-
-
 
 

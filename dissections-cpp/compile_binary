@@ -1,1 +1,0 @@
-g++ -Wall -O2 td-binary-output.cpp -o td-binary-output

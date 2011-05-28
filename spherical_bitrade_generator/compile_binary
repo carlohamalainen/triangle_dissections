@@ -1,4 +1,0 @@
-#!/bin/bash
-
-gcc -Wall -o spherical_trades_binary -O4 '-DPLUGIN="spherical_trades_binary.c"' plantri.c
-
