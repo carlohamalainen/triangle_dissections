@@ -538,6 +538,36 @@ vector<Point> triples_to_points(int nr_rows, int nr_cols, vector<Triple> &T2, ve
     return result;
 }
 
+// I'll represent a triangle as a length 3 vector of Points.
+vector<vector<Point> > triples_to_triangles(int nr_rows, int nr_cols, vector<Triple> &T2, vector<Rational> &solution)
+{
+    vector<vector<Point> > result;
+
+    for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
+        Rational w1 = solution[tIter->r];
+        Rational w2 = solution[tIter->c + nr_rows];
+        Rational w3 = solution[tIter->s + nr_rows + nr_cols];
+
+        Point pt1 = {QQ3(w2,      0), QQ3(w1,      0)};
+        Point pt2 = {QQ3(w2,      0), QQ3(w3 - w2, 0)};
+        Point pt3 = {QQ3(w3 - w1, 0), QQ3(w1,      0)};
+
+        set<Point> triangle_vertices_set;
+        triangle_vertices_set.insert(pt1);
+        triangle_vertices_set.insert(pt2);
+        triangle_vertices_set.insert(pt3);
+
+        // Remove duplicates and sort
+        // http://stackoverflow.com/questions/1041620/most-efficient-way-to-erase-duplicates-and-sort-a-c-vector
+        vector<Point> new_triangle;
+        new_triangle.assign(triangle_vertices_set.begin(), triangle_vertices_set.end());
+
+        result.push_back(new_triangle);
+    }
+
+    return result;
+}
+
 void print_point(Point p)
 {
     printf("[");
@@ -554,6 +584,18 @@ void transform_to_equilateral(vector<Point> &points)
         Point new_point = {sdiv(p->y, 2) + p->x, sdiv(QQ3(0, 1)*p->y, 2)};
         *p = new_point;
         // print_point(*p); printf("\n");
+    }
+}
+
+void transform_triangles_to_equilateral(vector<vector<Point> > &triangles)
+{
+    for(vector<vector<Point> >::iterator t = triangles.begin(); t != triangles.end(); t++) {
+        assert(t->size() == 3);
+
+        for(int i = 0; i < 3; i++) {
+            Point new_point = {sdiv((*t)[i].y, 2) + (*t)[i].x, sdiv(QQ3(0, 1)*(*t)[i].y, 2)};
+            (*t)[i] = new_point;
+        }
     }
 }
 
@@ -600,12 +642,34 @@ Point rotate_equilateral(Point p)
    return new_point;
 }
 
+vector<Point> rotate_equilateral_on_triangle_points(vector<Point> triangle)
+{
+    vector<Point> result;
+
+    for(vector<Point>::iterator iter = triangle.begin(); iter != triangle.end(); iter++) {
+        result.push_back(rotate_equilateral(*iter));
+    }
+
+    return result;
+}
+
 Point rotate_equilateral_inverse(Point p)
 {
    QQ3 sqrt3(0, 1);
    Point new_point = {sdiv(sqrt3*p.y, 2) - sdiv(p.x, 2) + QQ3(Rational(1, 2), Rational(0, 1)), sdiv(-sqrt3*p.x, 2) - sdiv(p.y, 2) + sdiv(sqrt3, 2)};
 
    return new_point;
+}
+
+vector<Point> rotate_equilateral_on_triangle_points_inverse(vector<Point> triangle)
+{
+    vector<Point> result;
+
+    for(vector<Point>::iterator iter = triangle.begin(); iter != triangle.end(); iter++) {
+        result.push_back(rotate_equilateral_inverse(*iter));
+    }
+
+    return result;
 }
 
 
@@ -622,6 +686,18 @@ Point reflect1(Point p)
     return result;
 }
 
+vector<Point> reflect1_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect1(triangle.at(i)));
+    }
+
+    return result;
+}
+
 Point reflect2(Point p)
 {
     Point p2 = rotate_equilateral_inverse(p);
@@ -631,6 +707,18 @@ Point reflect2(Point p)
     return p4;
 }
 
+vector<Point> reflect2_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect2(triangle.at(i)));
+    }
+
+    return result;
+}
+
 Point reflect3(Point p)
 {
     Point p2 = rotate_equilateral(p);
@@ -638,6 +726,18 @@ Point reflect3(Point p)
     Point p4 = rotate_equilateral_inverse(p3);
 
     return p4;
+}
+
+vector<Point> reflect3_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect3(triangle.at(i)));
+    }
+
+    return result;
 }
 
 vector<flist> points_to_4lists(vector<Point> pvec)
@@ -659,6 +759,112 @@ void print_list_of_4lists(vector<flist> lists)
         printf("] ");
     }
     printf("\n");
+}
+
+void print_list_of_12lists(vector<vector<Rational> > lists)
+{
+    for(unsigned int i = 0; i < lists.size(); i++) {
+        assert(lists.at(i).size() == 12);
+
+        for(unsigned int j = 0; j < 12; j++) {
+            print_rational(lists.at(i).at(j)); printf(" ");
+        }
+    }
+
+    printf("\n");
+}
+
+void sort_individual_triangles(vector<vector<Point> > &triangles)
+{
+    for(unsigned int i = 0; i < triangles.size(); i++) {
+        sort(triangles.at(i).begin(), triangles.at(i).end());
+    }
+}
+
+vector<Rational> triangle_to_12list(vector<Point> triangle)
+{
+    vector<Rational> result;
+
+    assert(triangle.size() == 3);
+
+    for(unsigned int t = 0; t < 3; t++) {
+        result.push_back(triangle.at(t).x.a);
+        result.push_back(triangle.at(t).x.b);
+        result.push_back(triangle.at(t).y.a);
+        result.push_back(triangle.at(t).y.b);
+    }
+
+    return result;
+}
+
+void towards_csig_triangles(vector<vector<Point> > &triangles)
+{
+    const unsigned int n = triangles.size();
+
+    // Transform the input points to the equilateral space.
+    transform_triangles_to_equilateral(triangles);
+
+    vector<vector<Point> > &identity_image = triangles;
+    vector<vector<Point> > rot_image(n), rot_inverse_image(n), reflect1_image(n), reflect2_image(n), reflect3_image(n);
+
+    // Calculate the images under the group S_3.
+    transform(triangles.begin(), triangles.end(), rot_image.begin(),        rotate_equilateral_on_triangle_points);
+    transform(triangles.begin(), triangles.end(), rot_inverse_image.begin(),        rotate_equilateral_on_triangle_points_inverse);
+    transform(triangles.begin(), triangles.end(), reflect1_image.begin(),   reflect1_on_triangle);
+    transform(triangles.begin(), triangles.end(), reflect2_image.begin(),   reflect2_on_triangle);
+    transform(triangles.begin(), triangles.end(), reflect3_image.begin(),   reflect3_on_triangle);
+
+    sort_individual_triangles(identity_image);
+    sort_individual_triangles(rot_image);
+    sort_individual_triangles(rot_inverse_image);
+    sort_individual_triangles(reflect1_image);
+    sort_individual_triangles(reflect2_image);
+    sort_individual_triangles(reflect3_image);
+
+    // A point (x, y) is equivalent to a 4-tuple (xa, xb, ya, yb).
+    // I want to store the whole triangle in the canonical signature, so that's going to be 3 4-tuples:
+    // (x1a, x1b, y1a, y1b) (x2a, x2b, y2a, y2b) (x3a, x3b, y3a, y3b)
+    //
+    // A triangle is a list of 3-tuples:
+    //
+    // t = [(x1a, x1b, y1a, y1b) (x2a, x2b, y2a, y2b) (x3a, x3b, y3a, y3b)]
+    //
+    // An image is a list of these triangles:
+    //
+    // im = [t1, t2, t3, t4]
+    //
+    // So we need to convert a triangle into a 12-list
+
+    vector<vector<Rational> > identity_image_12lists(n), rot_image_12lists(n), rot_inverse_image_12lists(n),
+                              reflect1_image_12lists(n), reflect2_image_12lists(n), reflect3_image_12lists(n);
+
+    transform(identity_image.begin(),       identity_image.end(),       identity_image_12lists.begin(),         triangle_to_12list);
+    transform(rot_image.begin(),            rot_image.end(),            rot_image_12lists.begin(),              triangle_to_12list);
+    transform(rot_inverse_image.begin(),    rot_inverse_image.end(),    rot_inverse_image_12lists.begin(),      triangle_to_12list);
+    transform(reflect1_image.begin(),       reflect1_image.end(),       reflect1_image_12lists.begin(),         triangle_to_12list);
+    transform(reflect2_image.begin(),       reflect2_image.end(),       reflect2_image_12lists.begin(),         triangle_to_12list);
+    transform(reflect3_image.begin(),       reflect3_image.end(),       reflect3_image_12lists.begin(),         triangle_to_12list);
+
+
+    sort(identity_image_12lists.begin(),        identity_image_12lists.end());
+    sort(rot_image_12lists.begin(),             rot_image_12lists.end());
+    sort(rot_inverse_image_12lists.begin(),     rot_inverse_image_12lists.end());
+    sort(reflect1_image_12lists.begin(),        reflect1_image_12lists.end());
+    sort(reflect2_image_12lists.begin(),        reflect2_image_12lists.end());
+    sort(reflect3_image_12lists.begin(),        reflect3_image_12lists.end());
+
+    // Choose the lexicographically minimal signature.
+    vector<vector<vector<Rational> > > all_images;
+    all_images.push_back(identity_image_12lists);
+    all_images.push_back(rot_image_12lists);
+    all_images.push_back(rot_inverse_image_12lists);
+    all_images.push_back(reflect1_image_12lists);
+    all_images.push_back(reflect2_image_12lists);
+    all_images.push_back(reflect3_image_12lists);
+
+    sort(all_images.begin(), all_images.end());
+    print_list_of_12lists(all_images[0]);
+
 }
 
 void towards_csig(vector<Point> &points)
@@ -711,8 +917,8 @@ void towards_csig(vector<Point> &points)
 
     sort(all_images.begin(), all_images.end());
     print_list_of_4lists(all_images[0]);
-}
 
+}
 int main()
 {
     int nr_rows, nr_cols, nr_syms, nr_elements;
@@ -734,7 +940,9 @@ int main()
             printf("\n");
             #endif
 
-            vector<Point> points = triples_to_points(nr_rows, nr_cols, T2, solution);
+            // vector<Point> points = triples_to_points(nr_rows, nr_cols, T2, solution);
+            vector<vector<Point> > triangles = triples_to_triangles(nr_rows, nr_cols, T2, solution);
+
             #if 0
             transform_to_equilateral(points);
             printf("points from solution: ");
@@ -743,7 +951,9 @@ int main()
             }
             printf("\n");
             #endif
-            towards_csig(points);
+
+            // towards_csig(points);
+            towards_csig_triangles(triangles);
         }
 
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
@@ -759,7 +969,9 @@ int main()
             printf("\n");
             #endif
 
-            vector<Point> points = triples_to_points(nr_rows, nr_cols, T1, solution);
+            // vector<Point> points = triples_to_points(nr_rows, nr_cols, T1, solution);
+            vector<vector<Point> > triangles = triples_to_triangles(nr_rows, nr_cols, T1, solution);
+
             #if 0
             transform_to_equilateral(points);
             printf("points from solution: ");
@@ -768,7 +980,9 @@ int main()
             }
             printf("\n");
             #endif
-            towards_csig(points);
+           
+            // towards_csig(points);
+            towards_csig_triangles(triangles);
         }
     }
 
