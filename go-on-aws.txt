@@ -1,0 +1,18 @@
+ec2-run-instances ami-68ad5201 -k ec2-keypair -t c1.xlarge
+
+---------------------------------------------------------------------------
+
+sudo apt-get install git-core make gcc gcc g++
+git clone git://github.com/carlohamalainen/triangle_dissections.git
+
+---------------------------------------------------------------------------
+
+ubuntu@domXXXXXXXXXXXXXXXXXXX:~/triangle_dissections$ df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/xvda1            9.9G  678M  8.7G   8% /
+none                  3.4G  124K  3.4G   1% /dev
+none                  3.4G     0  3.4G   0% /dev/shm
+none                  3.4G   40K  3.4G   1% /var/run
+none                  3.4G     0  3.4G   0% /var/lock
+/dev/xvdb             414G  199M  393G   1% /mnt
+
