@@ -1,4 +1,13 @@
+
 ec2-run-instances ami-68ad5201 -k ec2-keypair -t c1.xlarge
+
+ec2-run-instances ami-cf8d61a6 -k ec2-keypair -t c1.xlarge --instance-initiated-shutdown-behavior terminate -f test.sh
+
+xlarg has many cores: http://aws.amazon.com/ec2/instance-types/
+
+probably better to go with medium 32bit high cpu:
+
+ec2-run-instances ami-6836dc01 -k ec2-keypair -t c1.medium --instance-initiated-shutdown-behavior terminate -f test.sh
 
 ---------------------------------------------------------------------------
 
