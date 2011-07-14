@@ -6,11 +6,11 @@ make
 
 # Run for sizes up to 12:
 cd dissections-cpp
-cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td > separated-signatures-4
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td --separated > separated-signatures-4
 for i in {6..12}
 do
     echo $i
-    cat ../spherical_bitrade_generator/binary_spherical_bitrades_$i | ./td > separated-signatures-$i
+    cat ../spherical_bitrade_generator/binary_spherical_bitrades_$i | ./td --separated > separated-signatures-$i
 done
 
 ./count-signatures &> signature_counts_test_run.txt

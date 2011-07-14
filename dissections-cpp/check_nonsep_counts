@@ -1,0 +1,51 @@
+rm out_*
+
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_6 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_7 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_8 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_9 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_10 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_11 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_12 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_13 | ./td --separated-and-nonseparated
+
+printf "%d %d\n" 4  `cat out_4  | sort | uniq | wc -l`
+printf "%d %d\n" 6  `cat out_6  | sort | uniq | wc -l`
+printf "%d %d\n" 7  `cat out_7  | sort | uniq | wc -l`
+printf "%d %d\n" 8  `cat out_8  | sort | uniq | wc -l`
+printf "%d %d\n" 9  `cat out_9  | sort | uniq | wc -l`
+printf "%d %d\n" 10 `cat out_10 | sort | uniq | wc -l`
+printf "%d %d\n" 11 `cat out_11 | sort | uniq | wc -l`
+printf "%d %d\n" 12 `cat out_12 | sort | uniq | wc -l`
+printf "%d %d\n" 13 `cat out_13 | sort | uniq | wc -l`
+
+
+
+printf "\n\n=========================\n\n"
+
+rm out_*
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_6 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_7 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_8 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_9 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_10 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_11 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_12 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_13 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_14 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_15 | ./td --separated-and-nonseparated
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_16 | ./td --separated-and-nonseparated
+
+printf "%d %d\n" 4  `cat out_4  | sort | uniq | wc -l`
+printf "%d %d\n" 6  `cat out_6  | sort | uniq | wc -l`
+printf "%d %d\n" 7  `cat out_7  | sort | uniq | wc -l`
+printf "%d %d\n" 8  `cat out_8  | sort | uniq | wc -l`
+printf "%d %d\n" 9  `cat out_9  | sort | uniq | wc -l`
+printf "%d %d\n" 10 `cat out_10 | sort | uniq | wc -l`
+printf "%d %d\n" 11 `cat out_11 | sort | uniq | wc -l`
+printf "%d %d\n" 12 `cat out_12 | sort | uniq | wc -l`
+printf "%d %d\n" 13 `cat out_13 | sort | uniq | wc -l`
+
+

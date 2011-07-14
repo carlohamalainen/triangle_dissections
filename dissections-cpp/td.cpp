@@ -6,7 +6,16 @@
 #include <set>
 #include <vector>
 
+#include <cstring>
+
 using namespace std;
+
+#define MAX_OUTPUT_NR 50
+
+// <globals>
+bool only_separated;
+FILE * output_files[MAX_OUTPUT_NR+1];
+// </globals>
 
 int gcd(int u, int v)
 {
@@ -152,6 +161,16 @@ Rational operator-(const Rational &other)
     return neg;
 }
 
+Rational abs_rat(const Rational &other)
+{
+    Rational result;
+
+    result.numerator   = abs(other.numerator);
+    result.denominator = abs(other.denominator);
+
+    return result;
+}
+
 class QQ3
 {
     public:
@@ -235,14 +254,14 @@ Rational rat_div(Rational left, Rational right)
 
 // Pretty-print a rational number, shortening the
 // output if x == 0 or x is an integer.
-void print_rational(Rational x)
+void print_rational(FILE *f, Rational x)
 {
     if (x.numerator == 0)
-        printf("%d", 0);
+        fprintf(f, "%d", 0);
     else if (x.denominator == 1)
-        printf("%d", x.numerator);
+        fprintf(f, "%d", x.numerator);
     else
-        printf("%d/%d", x.numerator, x.denominator);
+        fprintf(f, "%d/%d", x.numerator, x.denominator);
 }
 
 //////////// Globals for the reduced row echelon form algorithm ///////////
@@ -270,7 +289,7 @@ void print_matrix()
 
     for(r = 0; r < __nr_rows; r++) {
         for(c = 0; c < __nr_cols; c++) {
-            print_rational(get(r, c)); printf(" ");
+            print_rational(stdout, get(r, c)); printf(" ");
         }
         printf("\n");
     }
@@ -506,11 +525,46 @@ QQ3 sdiv(QQ3 x, int y)
 void print_qq3(QQ3 q)
 {
     printf("(");
-    print_rational(q.a);
+    print_rational(stdout, q.a);
     printf(" + ");
-    print_rational(q.b);
+    print_rational(stdout, q.b);
     printf("*sqrt(3)");
 }
+
+Rational triangle_size(Point pt1, Point pt2, Point pt3)
+{
+    /* Original docstring from Sage version of the triangle
+    dissection code:
+
+    Return one of the side lengths of a triangle
+    with vertices p1, p2, p3. If the triangle degenerates, 
+    that is pt1 == pt2 == pt3, then we return 0.
+
+    EXAMPLES:
+        sage: from triangle_dissections import *
+        sage: triangle_size((0,0), (1,0), (0,1))
+        1
+        sage: triangle_size((1,0), (0,1), (0,0))
+        1
+        sage: triangle_size((1,1), (1,1), (1,1))
+        0
+    */
+
+    // We are working with points that have not been transformed
+    // into an equilateral triangle.
+    assert(pt1.x.b == 0);
+    assert(pt1.y.b == 0);
+    assert(pt2.x.b == 0);
+    assert(pt2.y.b == 0);
+    assert(pt3.x.b == 0);
+    assert(pt3.y.b == 0);
+
+    if (pt1.x.a == pt2.x.a) return abs_rat(pt1.y.a - pt2.y.a);
+    if (pt1.y.a == pt2.y.a) return abs_rat(pt1.x.a - pt2.x.a);
+
+    return triangle_size(pt2, pt3, pt1);
+}
+
 
 vector<Point> triples_to_points(int nr_rows, int nr_cols, vector<Triple> &T2, vector<Rational> &solution)
 {
@@ -551,6 +605,15 @@ vector<vector<Point> > triples_to_triangles(int nr_rows, int nr_cols, vector<Tri
         Point pt1 = {QQ3(w2,      0), QQ3(w1,      0)};
         Point pt2 = {QQ3(w2,      0), QQ3(w3 - w2, 0)};
         Point pt3 = {QQ3(w3 - w1, 0), QQ3(w1,      0)};
+
+        Rational t_size = triangle_size(pt1, pt2, pt3);
+        if (only_separated) {
+            assert(t_size > Rational(0));
+        } else {
+            if (t_size == Rational(0)) {
+                continue;
+            }
+        }
 
         set<Point> triangle_vertices_set;
         triangle_vertices_set.insert(pt1);
@@ -752,26 +815,27 @@ void print_list_of_4lists(vector<flist> lists)
 {
     for(vector<flist>::iterator iter = lists.begin(); iter != lists.end(); iter++) {
         printf("[");
-        print_rational(iter->a); printf(" ");
-        print_rational(iter->b); printf(" ");
-        print_rational(iter->c); printf(" ");
-        print_rational(iter->d);
+        print_rational(stdout, iter->a); printf(" ");
+        print_rational(stdout, iter->b); printf(" ");
+        print_rational(stdout, iter->c); printf(" ");
+        print_rational(stdout, iter->d);
         printf("] ");
     }
     printf("\n");
 }
 
-void print_list_of_12lists(vector<vector<Rational> > lists)
+void print_list_of_12lists(FILE *f, vector<vector<Rational> > lists)
 {
+    assert(f != NULL);
+
     for(unsigned int i = 0; i < lists.size(); i++) {
         assert(lists.at(i).size() == 12);
-
         for(unsigned int j = 0; j < 12; j++) {
-            print_rational(lists.at(i).at(j)); printf(" ");
+            print_rational(f, lists.at(i).at(j)); fprintf(f, " ");
         }
     }
 
-    printf("\n");
+    fprintf(f, "\n");
 }
 
 void sort_individual_triangles(vector<vector<Point> > &triangles)
@@ -801,8 +865,20 @@ void towards_csig_triangles(vector<vector<Point> > &triangles)
 {
     const unsigned int n = triangles.size();
 
+    if (output_files[n] == NULL) {
+        char filename[1000];
+        sprintf(filename, "out_%d", n);
+
+        output_files[n] = fopen(filename, "w");
+    }
+    // fprintf(stderr, "%d\n", n);
+
+    assert(output_files[n] != NULL);
+
     // Transform the input points to the equilateral space.
     transform_triangles_to_equilateral(triangles);
+
+    assert(triangles.size() == n);
 
     vector<vector<Point> > &identity_image = triangles;
     vector<vector<Point> > rot_image(n), rot_inverse_image(n), reflect1_image(n), reflect2_image(n), reflect3_image(n);
@@ -863,8 +939,9 @@ void towards_csig_triangles(vector<vector<Point> > &triangles)
     all_images.push_back(reflect3_image_12lists);
 
     sort(all_images.begin(), all_images.end());
-    print_list_of_12lists(all_images[0]);
 
+    assert(output_files[n] != NULL);
+    print_list_of_12lists(output_files[n], all_images[0]);
 }
 
 void towards_csig(vector<Point> &points)
@@ -919,8 +996,28 @@ void towards_csig(vector<Point> &points)
     print_list_of_4lists(all_images[0]);
 
 }
-int main()
+
+int main(int argc, const char* argv[])
 {
+    if (argc != 2) {
+        fprintf(stderr, "Usage: just the separated dissections: td --separated\nseparated and nonseparated dissections: td --separated-and-nonseparated\n\n");
+        exit(1);
+    }
+
+    const char *sep_or_nonsep = argv[1];
+
+    if (strcmp(sep_or_nonsep, "--separated") == 0) {
+       only_separated = true;
+    } else if (strcmp(sep_or_nonsep, "--separated-and-nonseparated") == 0) {
+       only_separated = false;
+    } else {
+        fprintf(stderr, "Usage: just the separated dissections: td --separated\nseparated and nonseparated dissections: td --separated-and-nonseparated\n\n");
+        exit(1);
+    }
+
+    for(int i = 0; i <= MAX_OUTPUT_NR; i++)
+        output_files[i] = NULL;
+
     int nr_rows, nr_cols, nr_syms, nr_elements;
     vector<Triple> T1, T2;
 
@@ -930,7 +1027,7 @@ int main()
         for(vector<Triple>::iterator tIter = T1.begin(); tIter != T1.end(); tIter++) {
             vector<Rational> solution(3 + T1.size() - 1);
             blah(nr_rows, nr_cols, nr_syms, *tIter, T1, T2, solution);
-            if (!is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
+            if (only_separated && !is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
 
             #if 0
             printf("solution: ");
@@ -959,7 +1056,7 @@ int main()
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
             vector<Rational> solution(3 + T2.size() - 1);
             blah(nr_rows, nr_cols, nr_syms, *tIter, T2, T1, solution);
-            if (!is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
+            if (only_separated && !is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
 
             #if 0
             printf("solution: ");
