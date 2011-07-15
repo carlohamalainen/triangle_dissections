@@ -231,27 +231,6 @@ QQ3 operator-(const QQ3 &other)
     return neg;
 }
 
-#if 0
-// Performs the division left/right.
-Rational rat_div(Rational left, Rational right)
-{
-    int k;
-    Rational result;
-
-    result.numerator   = left.numerator   * right.denominator;
-    result.denominator = left.denominator * right.numerator;
-
-    fix_signs(&result);
-
-    k = gcd(result.numerator, result.denominator);
-    result.numerator   /= k;
-    result.denominator /= k;
-
-    return result;
-}
-
-#endif
-
 // Pretty-print a rational number, shortening the
 // output if x == 0 or x is an integer.
 void print_rational(FILE *f, Rational x)
@@ -423,10 +402,18 @@ void zero_row(int row)
         __set(row, c, rat0);
 }
 
-void blah(int nr_rows, int nr_cols, int nr_syms, Triple identity_triple, vector<Triple> &T1, vector<Triple> &T2, vector<Rational> &solution)
+/*
+Given an identity triple and a bitrade (T1, T2), calculate the solution to its associated linear
+system of equations. The solution is placed in the vector 'solution', in the order rows,
+columns, and then symbols. See triples_to_triangles() for how to unpack the solution.
+ */
+void calculate_bitrade_solution(int nr_rows, int nr_cols, int nr_syms, Triple identity_triple,
+                                vector<Triple> &T1, vector<Triple> &T2, vector<Rational> &solution)
 {
     const int nr_rows_matrix = 3 + T1.size() - 1; //  3 identity equations, |T1|-1 element equations
     const int nr_cols_matrix = nr_rows + nr_cols + nr_syms + 1;
+
+    assert(solution.size() == (unsigned int) nr_rows_matrix);
 
     __M.resize(nr_rows_matrix*nr_cols_matrix);
     __nr_rows = nr_rows_matrix;
@@ -565,34 +552,7 @@ Rational triangle_size(Point pt1, Point pt2, Point pt3)
     return triangle_size(pt2, pt3, pt1);
 }
 
-
-vector<Point> triples_to_points(int nr_rows, int nr_cols, vector<Triple> &T2, vector<Rational> &solution)
-{
-    vector<Point> result;
-
-    for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
-        Rational w1 = solution[tIter->r];
-        Rational w2 = solution[tIter->c + nr_rows];
-        Rational w3 = solution[tIter->s + nr_rows + nr_cols];
-
-        Point pt1 = {QQ3(w2,      0), QQ3(w1,      0)};
-        Point pt2 = {QQ3(w2,      0), QQ3(w3 - w2, 0)};
-        Point pt3 = {QQ3(w3 - w1, 0), QQ3(w1,      0)};
-
-        result.push_back(pt1);
-        result.push_back(pt2);
-        result.push_back(pt3);
-    }
-
-    // Remove duplicates and sort
-    // http://stackoverflow.com/questions/1041620/most-efficient-way-to-erase-duplicates-and-sort-a-c-vector
-    set<Point> s(result.begin(), result.end());
-    result.assign(s.begin(), s.end());
-
-    return result;
-}
-
-// I'll represent a triangle as a length 3 vector of Points.
+// A triangle is a length 3 vector of Points.
 vector<vector<Point> > triples_to_triangles(int nr_rows, int nr_cols, vector<Triple> &T2, vector<Rational> &solution)
 {
     vector<vector<Point> > result;
@@ -861,7 +821,7 @@ vector<Rational> triangle_to_12list(vector<Point> triangle)
     return result;
 }
 
-void towards_csig_triangles(vector<vector<Point> > &triangles)
+void print_canonical_signature(vector<vector<Point> > &triangles)
 {
     const unsigned int n = triangles.size();
 
@@ -944,59 +904,6 @@ void towards_csig_triangles(vector<vector<Point> > &triangles)
     print_list_of_12lists(output_files[n], all_images[0]);
 }
 
-void towards_csig(vector<Point> &points)
-{
-    const unsigned int n = points.size();
-
-    // Transform the input points to the equilateral space.
-    transform_to_equilateral(points);
-
-    vector<Point> &identity_image = points;
-    vector<Point> rot_image(n), rot_inverse_image(n), reflect1_image(n), reflect2_image(n), reflect3_image(n);
-
-    // Calculate the images under the group S_3.
-    transform(points.begin(), points.end(), rot_image.begin(),          rotate_equilateral);
-    transform(points.begin(), points.end(), rot_inverse_image.begin(),  rotate_equilateral_inverse);
-    transform(points.begin(), points.end(), reflect1_image.begin(),     reflect1);
-    transform(points.begin(), points.end(), reflect2_image.begin(),     reflect2);
-    transform(points.begin(), points.end(), reflect3_image.begin(),     reflect3);
-
-    // Convert these into lists of 4-tuples.
-    vector<flist> identity_image_4lists       = points_to_4lists(identity_image);
-    vector<flist> rot_image_4lists            = points_to_4lists(rot_image);
-    vector<flist> rot_inverse_image_4lists    = points_to_4lists(rot_inverse_image);
-    vector<flist> reflect1_image_4lists       = points_to_4lists(reflect1_image);
-    vector<flist> reflect2_image_4lists       = points_to_4lists(reflect2_image);
-    vector<flist> reflect3_image_4lists       = points_to_4lists(reflect3_image);
-
-    // Sort these 4-tuples.
-    sort(identity_image_4lists.begin(),     identity_image_4lists.end());
-    sort(rot_image_4lists.begin(),          rot_image_4lists.end());
-    sort(rot_inverse_image_4lists.begin(),  rot_inverse_image_4lists.end());
-    sort(reflect1_image_4lists.begin(),     reflect1_image_4lists.end());
-    sort(reflect2_image_4lists.begin(),     reflect2_image_4lists.end());
-    sort(reflect3_image_4lists.begin(),     reflect3_image_4lists.end());
-
-    // Choose the lexicographically minimal signature.
-    // print_list_of_4lists(identity_image_4lists);
-    // print_list_of_4lists(rot_image_4lists);
-    // print_list_of_4lists(rot_inverse_image_4lists);
-    // print_list_of_4lists(reflect1_image_4lists);
-    // print_list_of_4lists(reflect2_image_4lists);
-    // print_list_of_4lists(reflect3_image_4lists);
-    vector<vector<flist> > all_images;
-    all_images.push_back(identity_image_4lists);
-    all_images.push_back(rot_image_4lists);
-    all_images.push_back(rot_inverse_image_4lists);
-    all_images.push_back(reflect1_image_4lists);
-    all_images.push_back(reflect2_image_4lists);
-    all_images.push_back(reflect3_image_4lists);
-
-    sort(all_images.begin(), all_images.end());
-    print_list_of_4lists(all_images[0]);
-
-}
-
 int main(int argc, const char* argv[])
 {
     if (argc != 2) {
@@ -1026,7 +933,7 @@ int main(int argc, const char* argv[])
 
         for(vector<Triple>::iterator tIter = T1.begin(); tIter != T1.end(); tIter++) {
             vector<Rational> solution(3 + T1.size() - 1);
-            blah(nr_rows, nr_cols, nr_syms, *tIter, T1, T2, solution);
+            calculate_bitrade_solution(nr_rows, nr_cols, nr_syms, *tIter, T1, T2, solution);
             if (only_separated && !is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
 
             #if 0
@@ -1037,7 +944,6 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            // vector<Point> points = triples_to_points(nr_rows, nr_cols, T2, solution);
             vector<vector<Point> > triangles = triples_to_triangles(nr_rows, nr_cols, T2, solution);
 
             #if 0
@@ -1049,13 +955,12 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            // towards_csig(points);
-            towards_csig_triangles(triangles);
+            print_canonical_signature(triangles);
         }
 
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
             vector<Rational> solution(3 + T2.size() - 1);
-            blah(nr_rows, nr_cols, nr_syms, *tIter, T2, T1, solution);
+            calculate_bitrade_solution(nr_rows, nr_cols, nr_syms, *tIter, T2, T1, solution);
             if (only_separated && !is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
 
             #if 0
@@ -1066,7 +971,6 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            // vector<Point> points = triples_to_points(nr_rows, nr_cols, T1, solution);
             vector<vector<Point> > triangles = triples_to_triangles(nr_rows, nr_cols, T1, solution);
 
             #if 0
@@ -1078,8 +982,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
            
-            // towards_csig(points);
-            towards_csig_triangles(triangles);
+            print_canonical_signature(triangles);
         }
     }
 
