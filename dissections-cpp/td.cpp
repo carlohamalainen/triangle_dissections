@@ -821,13 +821,13 @@ vector<Rational> triangle_to_12list(vector<Point> triangle)
     return result;
 }
 
-void print_canonical_signature(vector<vector<Point> > &triangles)
+void print_canonical_signature(vector<vector<Point> > &triangles, const char *output_prefix)
 {
     const unsigned int n = triangles.size();
 
     if (output_files[n] == NULL) {
         char filename[1000];
-        sprintf(filename, "out_%d", n);
+        sprintf(filename, "%sout_%d", output_prefix, n);
 
         output_files[n] = fopen(filename, "w");
     }
@@ -906,19 +906,20 @@ void print_canonical_signature(vector<vector<Point> > &triangles)
 
 int main(int argc, const char* argv[])
 {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: just the separated dissections: td --separated\nseparated and nonseparated dissections: td --separated-and-nonseparated\n\n");
+    if (argc != 3) {
+        fprintf(stderr, "Usage: just the separated dissections: td --separated <prefix>\nseparated and nonseparated dissections: td --separated-and-nonseparated <prefix>\n\n");
         exit(1);
     }
 
     const char *sep_or_nonsep = argv[1];
+    const char *output_prefix = argv[2];
 
     if (strcmp(sep_or_nonsep, "--separated") == 0) {
        only_separated = true;
     } else if (strcmp(sep_or_nonsep, "--separated-and-nonseparated") == 0) {
        only_separated = false;
     } else {
-        fprintf(stderr, "Usage: just the separated dissections: td --separated\nseparated and nonseparated dissections: td --separated-and-nonseparated\n\n");
+        fprintf(stderr, "Usage: just the separated dissections: td --separated <prefix>\nseparated and nonseparated dissections: td --separated-and-nonseparated <prefix>\n\n");
         exit(1);
     }
 
@@ -955,7 +956,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            print_canonical_signature(triangles);
+            print_canonical_signature(triangles, output_prefix);
         }
 
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
@@ -982,7 +983,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
            
-            print_canonical_signature(triangles);
+            print_canonical_signature(triangles, output_prefix);
         }
     }
 
