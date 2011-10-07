@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Test the spherical bitrade generator and the enumerator by counting all dissections up to size 14.
+
+make
+
+# Run for sizes up to 14:
+cd dissections-cpp
+cat ../spherical_bitrade_generator/binary_spherical_bitrades_4 | ./td --separated "separated_test_"
+for i in {6..14}
+do
+    echo $i
+    cat ../spherical_bitrade_generator/binary_spherical_bitrades_$i | ./td --separated "separated_test_"
+done
+
+./count-signatures &> signature_counts_test_run.txt
+cmp signature_counts_test_run.txt signature_counts_known_correct.txt
+
+RETVAL=$?
+[ $RETVAL -eq 0 ] && echo "Success (dissections-cpp) - all counts match:" && echo && cat signature_counts_test_run.txt 
+[ $RETVAL -ne 0 ] && echo "Fail! (dissections-cpp) Compare signature_counts_test_run.txt and signature_counts_known_correct.txt"
+
+

@@ -1,4 +1,4 @@
-SUBDIRS = dissections-cpp spherical_bitrade_generator
+SUBDIRS = dissections-cpp dissections-clojure spherical_bitrade_generator
 
 .PHONY: subdirs $(SUBDIRS)
 
