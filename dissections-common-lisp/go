@@ -1,0 +1,1 @@
+sbcl --eval '(progn (load "triangle_dissections.lisp") (enumerate-separated-dissections 4 14) (quit))'
