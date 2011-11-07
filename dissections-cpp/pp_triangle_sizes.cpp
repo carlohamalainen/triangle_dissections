@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
     std::string line;
     std::ifstream infile(argv[1]);
 
-    std::map<int, int> triangle_size_counts;
+    std::map<unsigned long long, unsigned long long> triangle_size_counts;
 
     while (getline(infile, line)) {
         vector<vector<Point> > triangles = parse_csig_line(line);
@@ -50,8 +50,8 @@ int main(int argc, char* argv[])
 
     infile.close();
 
-    for(std::map<int, int>::iterator it = triangle_size_counts.begin(); it != triangle_size_counts.end(); it++) {
-        printf("%d %d\n", it->first, it->second);
+    for(std::map<unsigned long long, unsigned long long>::iterator it = triangle_size_counts.begin(); it != triangle_size_counts.end(); it++) {
+        printf("%llu %llu\n", it->first, it->second);
     }
 
     return 0;

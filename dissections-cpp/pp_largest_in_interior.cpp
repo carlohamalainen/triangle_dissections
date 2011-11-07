@@ -7,28 +7,6 @@ using namespace std;
 
 const QQ3 QQ3_zero = QQ3(0, 0);
 
-double rational_to_double(Rational &r)
-{
-    return 1.0*r.numerator/r.denominator;
-}
-
-double qq3_to_double(QQ3 &q)
-{
-    return rational_to_double(q.a) + rational_to_double(q.b)*sqrt(3);
-}
-
-// uhh, these should be operators!
-bool qq3_lt(QQ3 q0, QQ3 q1)
-{
-    return qq3_to_double(q0) < qq3_to_double(q1);
-}
-
-bool qq3_gt(QQ3 q0, QQ3 q1)
-{
-    return qq3_to_double(q0) > qq3_to_double(q1);
-}
-
-
 bool is_on_line_0(Point &p)
 {
     // is p on the line y = 0?
@@ -101,23 +79,17 @@ bool poop(vector<vector<Point> > &dissection)
 }
 
 
-int main(int argc, char* argv[])
+int main()
 {
-    assert(argc == 2);
-
     std::string line;
-    std::ifstream infile(argv[1]);
 
-    while (getline(infile, line)) {
+    while (getline(cin, line)) {
         vector<vector<Point> > dissection = parse_csig_line(line);
         if (poop(dissection)) {
             std::cout << line << std::endl;
         }
     }
 
-    infile.close();
-
     return 0;
 }
-
 

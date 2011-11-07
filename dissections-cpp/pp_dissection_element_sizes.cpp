@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void size_of_inner_triangles(vector<vector<Point> > &triangles, std::map<int, int> &element_size_counts)
+void size_of_inner_triangles(vector<vector<Point> > &triangles, std::map<unsigned long long, unsigned long long> &element_size_counts)
 {
     // The dissections are presented with side y = 0 along the interval [0, 1]. Compute the
     // size of this triangle dissection if each sub-triangle has integer side length. We can use
@@ -41,24 +41,19 @@ void size_of_inner_triangles(vector<vector<Point> > &triangles, std::map<int, in
     }
 }
 
-int main(int argc, char* argv[])
+int main()
 {
-    assert(argc == 2);
-
     std::string line;
-    std::ifstream infile(argv[1]);
 
-    std::map<int, int> element_size_counts;
+    std::map<unsigned long long, unsigned long long> element_size_counts;
 
-    while (getline(infile, line)) {
+    while (getline(cin, line)) {
         vector<vector<Point> > triangles = parse_csig_line(line);
         size_of_inner_triangles(triangles, element_size_counts);
     }
 
-    infile.close();
-
-    for(std::map<int, int>::iterator it = element_size_counts.begin(); it != element_size_counts.end(); it++) {
-        printf("%d %d\n", it->first, it->second);
+    for(std::map<unsigned long long, unsigned long long>::iterator it = element_size_counts.begin(); it != element_size_counts.end(); it++) {
+        printf("%llu %llu\n", it->first, it->second);
     }
 
     return 0;

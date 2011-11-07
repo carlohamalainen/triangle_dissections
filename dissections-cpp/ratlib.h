@@ -17,6 +17,7 @@
 #include <iostream>
 #include <sstream>
 
+#include <math.h>
 
 using namespace std;
 
@@ -329,6 +330,29 @@ Rational parse_rational(string s)
 
     return Rational(n, d);
 }
+
+double rational_to_double(Rational &r)
+{
+    return 1.0*r.numerator/r.denominator;
+}
+
+double qq3_to_double(QQ3 &q)
+{
+    return rational_to_double(q.a) + rational_to_double(q.b)*sqrt(3);
+}
+
+// uhh, these should be operators!
+bool qq3_lt(QQ3 q0, QQ3 q1)
+{
+    return qq3_to_double(q0) < qq3_to_double(q1);
+}
+
+bool qq3_gt(QQ3 q0, QQ3 q1)
+{
+    return qq3_to_double(q0) > qq3_to_double(q1);
+}
+
+
 
 #endif
 
