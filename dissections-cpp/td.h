@@ -4,6 +4,11 @@
 #include <vector>
 #include "ratlib.h"
 
+QQ3 sdiv(QQ3 x, int y)
+{
+    return QQ3(x.a/Rational(y), x.b/Rational(y));
+}
+
 vector<vector<Point> > parse_csig_line(string line)
 {
     std::vector<std::string> strs;
@@ -110,6 +115,111 @@ int size_of_triangle(const vector<Point> &triangle, const int size_of_dissection
     assert(result.denominator == 1);
 
     return result.numerator;
+}
+
+Point rotate_equilateral(Point p)
+{
+   QQ3 sqrt3(0, 1);
+   Point new_point = {sdiv(-sqrt3*p.y, 2) - sdiv(p.x, 2) + QQ3(1, 0), sdiv(sqrt3*p.x, 2) - sdiv(p.y, 2)};
+
+   return new_point;
+}
+
+vector<Point> rotate_equilateral_on_triangle_points(vector<Point> triangle)
+{
+    vector<Point> result;
+
+    for(vector<Point>::iterator iter = triangle.begin(); iter != triangle.end(); iter++) {
+        result.push_back(rotate_equilateral(*iter));
+    }
+
+    return result;
+}
+
+Point rotate_equilateral_inverse(Point p)
+{
+   QQ3 sqrt3(0, 1);
+   Point new_point = {sdiv(sqrt3*p.y, 2) - sdiv(p.x, 2) + QQ3(Rational(1, 2), Rational(0, 1)), sdiv(-sqrt3*p.x, 2) - sdiv(p.y, 2) + sdiv(sqrt3, 2)};
+
+   return new_point;
+}
+
+vector<Point> rotate_equilateral_on_triangle_points_inverse(vector<Point> triangle)
+{
+    vector<Point> result;
+
+    for(vector<Point>::iterator iter = triangle.begin(); iter != triangle.end(); iter++) {
+        result.push_back(rotate_equilateral_inverse(*iter));
+    }
+
+    return result;
+}
+
+Point reflect1(Point p)
+{
+    QQ3 x0 = p.x;
+    QQ3 y  = p.y;
+
+    QQ3 x1 = x0 - QQ3(Rational(1, 2), 0);
+    QQ3 x2 = QQ3(-x1.a, x1.b);
+    QQ3 x3 = x2 + QQ3(Rational(1, 2), 0);
+
+    Point result = {x3, y};
+    return result;
+}
+
+vector<Point> reflect1_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect1(triangle.at(i)));
+    }
+
+    return result;
+}
+
+Point reflect2(Point p)
+{
+    Point p2 = rotate_equilateral_inverse(p);
+    Point p3 = reflect1(p2);
+    Point p4 = rotate_equilateral(p3);
+
+    return p4;
+}
+
+vector<Point> reflect2_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect2(triangle.at(i)));
+    }
+
+    return result;
+}
+
+Point reflect3(Point p)
+{
+    Point p2 = rotate_equilateral(p);
+    Point p3 = reflect1(p2);
+    Point p4 = rotate_equilateral_inverse(p3);
+
+    return p4;
+}
+
+vector<Point> reflect3_on_triangle(vector<Point> triangle)
+{
+    vector<Point> result;
+    assert(triangle.size() == 3);
+
+    for(unsigned int i = 0; i < triangle.size(); i++) {
+        result.push_back(reflect3(triangle.at(i)));
+    }
+
+    return result;
 }
 
 #endif
