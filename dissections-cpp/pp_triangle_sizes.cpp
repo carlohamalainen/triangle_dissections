@@ -28,16 +28,13 @@
 
 using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
-    assert(argc == 2);
-
     std::string line;
-    std::ifstream infile(argv[1]);
 
     std::map<unsigned long long, unsigned long long> triangle_size_counts;
 
-    while (getline(infile, line)) {
+    while (getline(cin, line)) {
         vector<vector<Point> > triangles = parse_csig_line(line);
 
         int t_size = size_of_outer_triangle(triangles);
@@ -47,8 +44,6 @@ int main(int argc, char* argv[])
 
         triangle_size_counts[t_size] += 1;
     }
-
-    infile.close();
 
     for(std::map<unsigned long long, unsigned long long>::iterator it = triangle_size_counts.begin(); it != triangle_size_counts.end(); it++) {
         printf("%llu %llu\n", it->first, it->second);

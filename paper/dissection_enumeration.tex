@@ -194,7 +194,10 @@ a situation arises for no dissecting line and if no
 dissecting vertex is incident to six dissecting triangles,
 then we call the dissection {\em separated}.
 We enumerate all isomorphism classes of 
-separated and nonseparated dissections up to size $20$.
+separated dissections up to size $24$ and provide lower 
+bounds\footnote{The original version of this paper reported the counts for nonseparated dissections
+as exact numbers, but this was incorrect due to the way that the code was implemented.}
+on the numer of nonseparated dissections up to size $20$.
 
 \section{Dissections and latin bitrades}
 
@@ -677,7 +680,7 @@ automorphism group of order $k$.}
 \hline
 \end{tabular}
 \end{center}
-\caption{Number of separated and nonseparated dissections of size $n$, up to isomorphism.
+\caption{Lower bounds on the number of separated and nonseparated dissections of size $n$, up to isomorphism.
 For each $n$, the column $A(n,k)$
 records the number of dissections of size $n$ with
 automorphism group of order $k$.}
@@ -1026,8 +1029,76 @@ dissections of size $n \in \{4, 6, 7, 8, 9, 10 \}$.
 \includegraphics{output-dissections-dissection10_i29_r2_c3.pdf}
 \includegraphics{output-dissections-dissection10_i45_r3_c1.pdf}
 
+\clearpage
+
+\section*{Appendix B: Further Analysis}
+
+The questions in this appendix were suggested by 
+Stuart Anderson\footnote{\texttt{stuart.errol.anderson@gmail.com} and
+\url{http://www.squaring.net/}} (personal communication with Carlo Hamalainen).
+
+\begin{itemize}
+
+\item What is the range of sides for dissected triangles across and
+between orders? 
+
+See pp\_triangle\_sizes.cpp
+
+\item What is the range of sizes for elements of dissected triangles
+across and between orders?
+
+See pp\_dissection\_element\_sizes.cpp
+
+\item Do isomers (same elements arranged differently) exist? What is
+the minimum order?
+
+See pp\_isomer\_sigs; there seem to exist isomers for each order geq
+7, can use pp\_isomer\_sigs to count the number of isomer classes
+for each order. Another sequence...
+
+\item Do disjoint-ntuples exist (same size triangles, same number of
+elements, all different sizes) can we make the equivalent of compound
+perfect squares with compound perfect triangled triangles composed
+of disjoint n-tuples?
+
+\item What is the smallest order compound triangled triangle that can
+be made? (I guess it would be 29, Tuttes order 15 enlarged and put
+inside itself, unless there's another way to do it with fewer squares,
+i havnt really thought about it)
+
+\item What is the smallest triangle that can exist on a corner, or
+on the boundary? (for squared squares its 5 on the boundary and 9
+on a corner and those squares are extremely rare, order 44, Gambini
+found them)
+
+\item Can the largest element be completely in the interior? (this
+is possible for squared squares) If possible, smallest order?
+
+Yes, two examples of order 18, see pp\_largest\_in\_interior.cpp
+
+\item How high can you get in ratio between the smallest element and
+the largest? (try to make or find a tiling where the smallest element
+is as large as possible (compared to the largest)
+
+See ./pp\_ratio\_spectrum.cpp for a count of all ratios of largest/smallest.
+
+See also pp\_plot\_ratio\_spectrum.py for plotting the output of ./pp\_ratio\_spectrum.cpp 
+
+\item What is the distribution of odd and even elements by order?
+is the distribution mod 3 more relevant?
+
+\item What is the distribution of prime numbers as triangle elements?
+(squared square elements appear to have a normal distribution) Lots
+of questions....
+
+\end{itemize}
+
+\subsection*{B.1 blah}
+
+\subsection*{B.2 bleh}
 
 \end{document}
+
 
 
 
