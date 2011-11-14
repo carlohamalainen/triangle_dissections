@@ -1,8 +1,11 @@
-all: td pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs
+all: td aut_groups pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs
 
 
-td: td.cpp ratlib.h
+td: td.cpp td.h ratlib.h
 	g++ -Wall -O4 -I/opt/boost_1_47_0/ td.cpp -o td
+
+aut_groups: aut_groups.cpp td.h ratlib.h
+	g++ -Wall -O4 -I/opt/boost_1_47_0/ aut_groups.cpp -o aut_groups
 
 pp_triangle_sizes: pp_triangle_sizes.cpp td.h ratlib.h
 	g++ -Wall -O4 -I/opt/boost_1_47_0/ pp_triangle_sizes.cpp -o pp_triangle_sizes
