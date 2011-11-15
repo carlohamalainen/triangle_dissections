@@ -1,0 +1,3 @@
+The run for n=24 needed almost 2Tb of disk space.
+
+I used "make -j 14" to run 14 processes (on a 16 core computer).
