@@ -441,29 +441,6 @@ void print_list_of_12lists(FILE *f, vector<vector<Rational> > lists)
     fprintf(f, "\n");
 }
 
-void sort_individual_triangles(vector<vector<Point> > &triangles)
-{
-    for(unsigned int i = 0; i < triangles.size(); i++) {
-        sort(triangles.at(i).begin(), triangles.at(i).end());
-    }
-}
-
-vector<Rational> triangle_to_12list(vector<Point> triangle)
-{
-    vector<Rational> result;
-
-    assert(triangle.size() == 3);
-
-    for(unsigned int t = 0; t < 3; t++) {
-        result.push_back(triangle.at(t).x.a);
-        result.push_back(triangle.at(t).x.b);
-        result.push_back(triangle.at(t).y.a);
-        result.push_back(triangle.at(t).y.b);
-    }
-
-    return result;
-}
-
 void print_canonical_signature(vector<vector<Point> > &triangles, const char *output_prefix)
 {
     const unsigned int n = triangles.size();

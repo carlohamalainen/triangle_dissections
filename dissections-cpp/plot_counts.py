@@ -7,10 +7,11 @@ import pylab as plt
 
 plt.clf(); plt.cla();
 
-plt.plot(x, y, 'o')
+plt.plot(x, y, 'x')
 plt.title('Number of separated triangle dissections')
 plt.xlabel('n')
 plt.ylabel('nr dissections (log scale)')
 plt.yscale('log')
 
 plt.savefig('signature_counts.png')
+plt.savefig('signature_counts.pdf')

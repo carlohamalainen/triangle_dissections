@@ -608,7 +608,8 @@ we have enumerated the number of isomorphism classes of
 dissections of size $n \leq 20$. We also record $A(n,k)$, the
 number of dissections of size $n$ with
 automorphism group of order $k$. See Figures~\ref{figCountSeparated} and
-\ref{figCountSeparatedAndNonseparated} for the data.
+\ref{figCountSeparatedAndNonseparated} for the data. Figure~\ref{logSignatureCounts} has a plot of the 
+number of separated dissections with a log scale on the y-axis.
 
 The referee raised the question of asymptotic behaviour. Let us denote
 by $d_n$ the number of all dissections of size $n$.  Thus $d_4 = 1$,
@@ -645,6 +646,10 @@ $e_{20}$ is smaller than $d_{20}$, seems to be surprising.
 \hline 18 & 172162 & 171923 & 239 & 0 & 0 \\
 \hline 19 & 583810 & 583426 & 383 & 0 & 1 \\
 \hline 20 & 1998407 & 1997752 & 655 & 0 & 0 \\
+\hline 21 & 6902289 & FIXME & FIXME & FIXME & FIXME \\
+\hline 22 & 24049989 & FIXME & FIXME & FIXME & FIXME \\
+\hline 23 & 84364122 & FIXME & FIXME & FIXME & FIXME \\
+\hline 24 & 297894288 & FIXME & FIXME & FIXME & FIXME \\
 \hline
 \end{tabular}
 \end{center}
@@ -688,6 +693,13 @@ automorphism group of order $k$.}
 \end{figure}
 %
 
+\begin{figure}[htbp]
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{signature_counts.pdf}}
+\end{center}
+\caption{Number of separated dissections up to size $24$.}
+\label{logSignatureCounts}
+\end{figure}
 
 
 

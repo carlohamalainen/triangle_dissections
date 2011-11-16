@@ -232,6 +232,16 @@ typedef struct struct_point {
         return false;
     }
 
+    bool operator==(const struct_point& rhs) const
+    {
+        return x == rhs.x && y == rhs.y;
+    }
+
+    bool operator!=(const struct_point& rhs) const
+    {
+        return !(x == rhs.x && y == rhs.y);
+    }
+
     QQ3 x, y;
 } Point;
 
