@@ -21,3 +21,4 @@ for n in range(4, 24 + 1):
     plt.xlim(0, ceil(1.2*max(x)))
     plt.ylim(0, ceil(1.2*max(y)))
     plt.savefig('pp_ratio_spectrum_%d.png' % n)
+    plt.savefig('pp_ratio_spectrum_%d.pdf' % n)
