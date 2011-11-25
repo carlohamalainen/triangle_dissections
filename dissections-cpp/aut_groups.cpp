@@ -8,6 +8,8 @@
 
 #include <cstring>
 
+#include <time.h>
+
 #include "ratlib.h"
 #include "td.h"
 
@@ -92,8 +94,11 @@ int aut_group_size(vector<vector<Point> > &triangles)
     return aut_size;
 }
 
+#define nr_dissections_24 297894288
+
 int main()
 {
+    time_t t_start, t_end;
     std::string line;
 
     unsigned long long aut_group_size_counts[7];
@@ -102,9 +107,35 @@ int main()
     aut_group_size_counts[3] = 0;
     aut_group_size_counts[6] = 0;
 
+#ifdef SIZE_24_STATUS_OUTPUT
+    unsigned long long counter = 0;
+    time(&t_start);
+#endif
+
     while (getline(cin, line)) {
         vector<vector<Point> > triangles = parse_csig_line(line);
         aut_group_size_counts[aut_group_size(triangles)] += 1;
+
+#ifdef SIZE_24_STATUS_OUTPUT
+        counter++;
+
+        if (counter == 10000) {
+            time(&t_end);
+
+            double nr_processed = aut_group_size_counts[1] + aut_group_size_counts[2] + aut_group_size_counts[3] + aut_group_size_counts[6];
+            double nr_to_go = nr_dissections_24 - nr_processed;
+            double seconds_per_10000 = difftime(t_end, t_start);
+
+            double hours_to_go = nr_to_go/10000*seconds_per_10000/60.0/60.0;
+            double days_to_go  = hours_to_go/24;
+
+            cout << "# " << hours_to_go << " hours to go (" << days_to_go << " days)" << " :: " \
+                << aut_group_size_counts[1] << " " << aut_group_size_counts[2] << " " << aut_group_size_counts[3] << " " << aut_group_size_counts[6] << std::endl;
+
+            counter = 0;
+            time(&t_start);
+        }
+#endif
     }
 
     cout << aut_group_size_counts[1] << " " << aut_group_size_counts[2] << " " << aut_group_size_counts[3] << " " << aut_group_size_counts[6] << std::endl;
