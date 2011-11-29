@@ -14,7 +14,7 @@ for n in range(4, 24 + 1):
 
     plt.clf(); plt.cla();
 
-    plt.plot(x, y, 'o')
+    plt.plot(x, y, 'x', color='black')
     plt.title('Ratio of largest to smallest triangle, n = %d' % n)
     plt.xlabel('ratio')
     plt.ylabel('frequency')

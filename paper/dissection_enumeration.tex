@@ -612,18 +612,40 @@ automorphism group of order $k$. See Figures~\ref{figCountSeparated} and
 number of separated dissections with a log scale on the y-axis.
 
 The referee raised the question of asymptotic behaviour. Let us denote
-by $d_n$ the number of all dissections of size $n$.  Thus $d_4 = 1$,
-$\dots$, $d_{13} = 574$, $\dots$, $d_{20} = 2674753$.  There are some
+by $d_n$ the number of separated dissections of size $n$.  Thus $d_4 = 1$,
+$\dots$, $d_{13} = 574$, $\dots$, $d_{24} = 297894288$.  There are some
 reasons to believe that $d_n$ can be estimated as $\sigma(n)^n$,
-where $\sigma(n)$ is a slowly growing function.  The asymptotic
+where $\sigma(n)$ is a slowly growing function. The asymptotic
 behaviour of $\sigma(n)$ is not clear yet and is a subject of ongoing
 research. Note however that $d_n \ge e_n = (3.43)^{n-8}$ for every
-$n\notin \{18,19\}$ such that $8 \le n \le 20$.  If we put $\mu_n =
+$n\notin \{18,19\}$ such that $8 \le n \le 24$.  If we put $\mu_n =
 e_n/d_n$, then in this interval the approximate values of $\mu_n$
-are $0.33$, $0.38$, $0.51$, $0.65$, $0.74$, $0.83$, $0.89$, $0.94$,
-$0.97$, $0.99$, $1.00$, $1.00$ and $0.99$. The fact that $e_{18}$
-and $e_{19}$ are slightly greater than $d_{18}$ and $d_{19}$, while
-$e_{20}$ is smaller than $d_{20}$, seems to be surprising.
+are:
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline $n$ & $\mu_n$ \\
+\hline
+\hline 8 & 0.33 \\
+\hline 9 & 0.42 \\
+\hline 10 & 0.55 \\
+\hline 11 & 0.67 \\
+\hline 12 & 0.76 \\
+\hline 13 & 0.86 \\
+\hline 14 & 0.91 \\
+\hline 15 & 0.95 \\
+\hline 16 & 0.97 \\
+\hline 17 & 0.98 \\
+\hline 18 & 0.97 \\
+\hline 19 & 0.96 \\
+\hline 20 & 0.93 \\
+\hline 21 & 0.90 \\
+\hline 22 & 0.86 \\
+\hline 23 & 0.81 \\
+\hline 24 & 0.77 \\
+\hline
+\end{tabular}
+\end{center}
+It is surprising, however, that $\mu_n$ is not monotonically increasing.
 %
 \begin{figure}[htbp]
 \begin{center}
@@ -647,9 +669,9 @@ $e_{20}$ is smaller than $d_{20}$, seems to be surprising.
 \hline 19 & 583810 & 583426 & 383 & 0 & 1 \\
 \hline 20 & 1998407 & 1997752 & 655 & 0 & 0 \\
 \hline 21 & 6902289 & 6901247 & 1042 & 0 & 0 \\
-\hline 22 & 24049989 & FIXME & FIXME & FIXME & FIXME \\
-\hline 23 & 84364122 & FIXME & FIXME & FIXME & FIXME \\
-\hline 24 & 297894288 & FIXME & FIXME & FIXME & FIXME \\
+\hline 22 & 24049989 & 24048266 & 1722 & 0 & 1 \\
+\hline 23 & 84364122 & 84361256 & 2866 & 0 & 0 \\
+\hline 24 & 297894288 & 297889633 & 4655 & 0 & 0 \\
 \hline
 \end{tabular}
 \end{center}
@@ -1056,6 +1078,92 @@ between orders?
 
 See pp\_triangle\_sizes.cpp
 
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_4.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_6.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_7.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_8.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_9.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_10.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_11.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_12.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_13.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_14.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_15.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_16.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_17.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_18.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_19.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_20.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_21.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_22.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_23.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_24.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_all.pdf}}
+\end{center}
+
+
+
 \item What is the range of sizes for elements of dissected triangles
 across and between orders?
 
@@ -1107,10 +1215,6 @@ of questions....
 
 \clearpage
 \subsection*{B.1 blah}
-
-\begin{center}
-\resizebox{12cm}{!}{\includegraphics{signature_counts.pdf}}
-\end{center}
 
 \begin{center}
 \resizebox{12cm}{!}{\includegraphics{pp_ratio_spectrum_4.pdf}}
