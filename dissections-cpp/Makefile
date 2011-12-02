@@ -1,4 +1,4 @@
-all: td aut_groups pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs
+all: td aut_groups pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs pp_perfect_dissections
 
 
 td: td.cpp td.h ratlib.h
@@ -21,6 +21,9 @@ pp_ratio_spectrum: pp_ratio_spectrum.cpp td.h ratlib.h
 
 pp_isomer_sigs: pp_isomer_sigs.cpp td.h ratlib.h
 	g++ -Wall -O4 -I/opt/boost_1_47_0/ -lm pp_isomer_sigs.cpp -o pp_isomer_sigs
+
+pp_perfect_dissections: pp_perfect_dissections.cpp td.h ratlib.h
+	g++ -Wall -O4 -I/opt/boost_1_47_0/ -lm pp_perfect_dissections.cpp -o pp_perfect_dissections
 
 clean:
 	rm -f td pp_dissection_element_sizes pp_largest_in_interior pp_triangle_sizes pp_ratio_spectrum pp_isomer_sigs separated_test_out_*

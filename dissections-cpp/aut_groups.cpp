@@ -98,7 +98,10 @@ int aut_group_size(vector<vector<Point> > &triangles)
 
 int main()
 {
+#ifdef SIZE_24_STATUS_OUTPUT
     time_t t_start, t_end;
+#endif
+
     std::string line;
 
     unsigned long long aut_group_size_counts[7];
