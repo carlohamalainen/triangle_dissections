@@ -198,6 +198,9 @@ separated dissections up to size $24$ and provide lower
 bounds\footnote{The original version of this paper reported the counts for nonseparated dissections
 as exact numbers, but this was incorrect due to the way that the code was implemented.}
 on the numer of nonseparated dissections up to size $20$.
+Sections \ref{sec:range-of-sides} to \ref{fixme:last} contain computational results to questions suggested
+by Stuart Anderson\footnote{\texttt{stuart.errol.anderson@gmail.com} and
+\url{http://www.squaring.net/}} (personal communication with Carlo H\"{a}m\"{a}l\"{a}inen).
 
 \section{Dissections and latin bitrades}
 
@@ -596,10 +599,8 @@ $(U^{\opa},U^{\opb})$ is not isomorphic to $(U^{\opb},U^{\opa})$. The
 final counts for the number of dissections up to isomorphism are found
 by simply removing duplicate signatures.
 
-While the solutions to $\eq(T, a)$ exist in the rationals, we find it
-easier to work with the final equilateral dissections instead. We use the SymPy package~\cite{sympy} to perform
-exact symbolic arithmetic on the canonical form of each dissection.
-
+While the solutions to $\eq(T, a)$ exist in the rationals, we ultimately work
+with lists of triangle vertices in $\mathbb{Q}(\sqrt{3})$.
 
 \subsection{Dissections and automorphism groups}
 
@@ -909,188 +910,14 @@ The dissections that give rise to these maximum ratios are shown below
 \includegraphics{max_relative_size_19.pdf}\includegraphics{max_relative_size_20.pdf}
 \end{center}
 
-\clearpage
+For further results on the ratio of the maximum size element to the smallest element, see Section~\ref{sec:ratios}.
 
-%\bibliographystyle{elsarticle-num}
-%\bibliography{dissection_enumeration}
+\subsection{Range of sides}
+\label{sec:range-of-sides}
 
-\begin{thebibliography}{10}
-\expandafter\ifx\csname url\endcsname\relax
-  \def\url#1{\texttt{#1}}\fi
-\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
-\expandafter\ifx\csname href\endcsname\relax
-  \def\href#1#2{#2} \def\path#1{#1}\fi
-
-\bibitem{plantri}
-G.~Brinkmann, B.~D. McKay, plantri (software),
-  \url{http://cs.anu.edu.au/∼bdm/plantri}.
-
-\bibitem{plantri2}
-G.~Brinkmann, B.~D. McKay, Fast generation of some classes of planar
-graphs, Electronic Notes in Discrete Mathematics 3 (1999) 28--31.
-  \url{http://cs.anu.edu.au/∼bdm/plantri}.
-
-\bibitem{MR0003040}
-R.~L. Brooks, C.~A.~B. Smith, A.~H. Stone, W.~T. Tutte, The dissection of
-  rectangles into squares, Duke Math. J. 7 (1940) 312--340.
-
-\bibitem{planareulerian}
-N.~J. Cavenagh, P.~Lison\v ek, Planar eulerian triangulations are equivalent to
-  spherical latin bitrades, J. Comb. Theory, Ser. A 115~(1) (2008) 193--197.
-
-\bibitem{nickWanlessBlah}
-N.~J. Cavenagh, I.~M. Wanless, Latin trades in groups defined on planar
-  triangulations, J. Algebraic Combin. 30 (2009) 323--347.
-
-\bibitem{wanlesshandbook}
-C.~J. Colbourn, J.~H. Dinitz, I.~M. Wanless, Handbook of combinatorial designs,
-  Chapman \& Hall/CRC, Boca Raton, FL, 2007.
-
-\bibitem{alesnew}
-A.~Dr{\'a}pal, Dissections of equilateral triangles and pointed spherical latin
-  bitrades, submitted.
-
-\bibitem{ales-geometrical}
-A.~Dr{\'a}pal, Geometrical structure and construction of latin trades, Advances
-  in Geometry 9~(3) (2009) 311--348.
-
-\bibitem{Dr9}
-A.~Dr{\'a}pal, Geometry of latin trades, manuscript circulated at the
-  conference Loops, Prague (2003).
-
-\bibitem{aleshamming}
-A.~Dr{\'a}pal, Hamming distances of groups and quasi-groups, Discrete Math.
-  235~(1-3) (2001) 189--197, combinatorics (Prague, 1998).
-
-\bibitem{alesdissections}
-A.~Dr{\'a}pal, V.~Kala, C.~H\"{a}m\"{a}l\"{a}inen, Latin bitrades,
-  dissections of equilateral triangles and abelian groups,
-  Journal of Combinatorial Designs, Volume 18 Issue 1 (2010), 1--24.
-
-\bibitem{hamalainen2007}
-C.~H\"{a}m\"{a}l\"{a}inen, Latin bitrades and related structures, {PhD} in
-  {M}athematics, Department of Mathematics, The University of Queensland,
-  http://carlo-hamalainen.net/phd/hamalainen-20071025.pdf (2007).
-
-\bibitem{code}
-C.~H\"{a}m\"{a}l\"{a}inen, Spherical bitrade enumeration code,
-  \url{http://bitbucket.org/carlohamalainen/spherical}.
-
-\bibitem{dissections}
-C.~H\"{a}m\"{a}l\"{a}inen,
-Triangle dissections code,
-  \url{http://bitbucket.org/carlohamalainen/dissections}.
-
-\bibitem{MR1092545}
-M.~Laczkovich, Tilings of polygons with similar triangles, Combinatorica 10~(3)
-  (1990) 281--306.
-
-\bibitem{MR1794696}
-J.~D. Skinner, C.~A.~B. Smith, W.~T. Tutte, On the dissection of rectangles
-  into right-angled isosceles triangles, J. Combin. Theory Ser. B 80~(2) (2000)
-  277--319.
-
-\bibitem{sympy}
-{SymPy Development Team}, \href{http://www.sympy.org}{SymPy: Python library for
-  symbolic mathematics} (2009).
-\newline\urlprefix\url{http://www.sympy.org}
-
-\bibitem{squaring}
-Tiling by similar triangles, \url{http://www.squaring.net/tri/twt.html}.
-
-\bibitem{MR0027521}
-W.~T. Tutte, The dissection of equilateral triangles into equilateral
-  triangles, Proc. Cambridge Philos. Soc. 44 (1948) 463--482.
-
-\bibitem{wanlessenumeration}
-Ian~M. Wanless.
-\newblock A computer enumeration of small {L}atin trades.
-\newblock {\em Australas. J. Combin.}, 39:247--258, 2007.
-
-
-\end{thebibliography}
-
-\clearpage
-
-\section*{Appendix A: Triangle dissections}
-
-Here we present representatives of the isomorphism classes of triangle
-dissections of size $n \in \{4, 6, 7, 8, 9, 10 \}$.
-
-%Unused now
-%\input{data_unique_dissections.tex}
-
-\subsection*{$n = 4$}
-
-\includegraphics{output-dissections-dissection4_i36_r3_c1.pdf}
-
-\subsection*{$n = 6$}
-
-\includegraphics{output-dissections-dissection6_i41_r1_c3.pdf}
-
-\subsection*{$n = 7$}
-
-\includegraphics{output-dissections-dissection7_i27_r3_c2.pdf}
-\includegraphics{output-dissections-dissection7_i29_r1_c2.pdf}
-
-\subsection*{$n = 8$}
-
-\includegraphics{output-dissections-dissection8_i31_r2_c4.pdf}
-\includegraphics{output-dissections-dissection8_i37_r2_c2.pdf}
-\includegraphics{output-dissections-dissection8_i37_r2_c4.pdf}
-
-\subsection*{$n = 9$}
-
-\includegraphics{output-dissections-dissection9_i10_r0_c2.pdf}
-\includegraphics{output-dissections-dissection9_i10_r0_c3.pdf}
-\includegraphics{output-dissections-dissection9_i10_r2_c2.pdf}
-\includegraphics{output-dissections-dissection9_i11_r0_c3.pdf}
-\includegraphics{output-dissections-dissection9_i11_r1_c0.pdf}
-\includegraphics{output-dissections-dissection9_i11_r1_c3.pdf}
-\includegraphics{output-dissections-dissection9_i13_r2_c1.pdf}
-\includegraphics{output-dissections-dissection9_i13_r2_c3.pdf}
-\includegraphics{output-dissections-dissection9_i45_r0_c0.pdf}
-
-\subsection*{$n = 10$}
-
-\includegraphics{output-dissections-dissection10_i15_r4_c1.pdf}
-\includegraphics{output-dissections-dissection10_i17_r1_c0.pdf}
-\includegraphics{output-dissections-dissection10_i17_r1_c1.pdf}
-\includegraphics{output-dissections-dissection10_i17_r3_c0.pdf}
-\includegraphics{output-dissections-dissection10_i17_r3_c1.pdf}
-\includegraphics{output-dissections-dissection10_i17_r3_c2.pdf}
-\includegraphics{output-dissections-dissection10_i19_r2_c3.pdf}
-\includegraphics{output-dissections-dissection10_i19_r3_c1.pdf}
-\includegraphics{output-dissections-dissection10_i19_r3_c3.pdf}
-\includegraphics{output-dissections-dissection10_i21_r1_c2.pdf}
-\includegraphics{output-dissections-dissection10_i21_r1_c3.pdf}
-\includegraphics{output-dissections-dissection10_i21_r2_c2.pdf}
-\includegraphics{output-dissections-dissection10_i21_r2_c3.pdf}
-\includegraphics{output-dissections-dissection10_i23_r3_c0.pdf}
-\includegraphics{output-dissections-dissection10_i23_r3_c1.pdf}
-\includegraphics{output-dissections-dissection10_i23_r3_c2.pdf}
-\includegraphics{output-dissections-dissection10_i25_r0_c0.pdf}
-\includegraphics{output-dissections-dissection10_i25_r1_c0.pdf}
-\includegraphics{output-dissections-dissection10_i25_r1_c3.pdf}
-\includegraphics{output-dissections-dissection10_i26_r0_c3.pdf}
-\includegraphics{output-dissections-dissection10_i29_r2_c0.pdf}
-\includegraphics{output-dissections-dissection10_i29_r2_c3.pdf}
-\includegraphics{output-dissections-dissection10_i45_r3_c1.pdf}
-
-\clearpage
-
-\section*{Appendix B: Further Analysis}
-
-The questions in this appendix were suggested by 
-Stuart Anderson\footnote{\texttt{stuart.errol.anderson@gmail.com} and
-\url{http://www.squaring.net/}} (personal communication with Carlo Hamalainen).
-
-\begin{itemize}
-
-\item What is the range of sides for dissected triangles across and
-between orders? 
-
-See pp\_triangle\_sizes.cpp
+Question: what is the range of sides for dissected triangles across and
+between orders? For post-processing code, refer to \texttt{pp\_triangle\_sizes.cpp} in \cite{githubrepo}.
+The next plots show the number of triangles with given side for a fixed order $n$.
 
 \begin{center}
 \resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_4.pdf}}
@@ -1172,63 +999,167 @@ See pp\_triangle\_sizes.cpp
 \resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_24.pdf}}
 \end{center}
 
+\clearpage
+
+The next plot shows the number of triangles with given side, across all $4 \leq n \leq 24$.
+
 \begin{center}
 \resizebox{12cm}{!}{\includegraphics{pp_triangle_sizes_all.pdf}}
 \end{center}
 
+\clearpage
+\subsection{Range of element sizes}
 
+Question: what is the range of sizes for elements of dissected
+triangles across and between orders? For post-processing code, refer
+to \texttt{pp\_dissection\_element\_sizes.cpp} in \cite{githubrepo}.
+The next plots show the number of triangle elements of particular
+sizes for a fixed order $n$.
 
-\item What is the range of sizes for elements of dissected triangles
-across and between orders?
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_4.pdf}}
+\end{center}
 
-See pp\_dissection\_element\_sizes.cpp
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_6.pdf}}
+\end{center}
 
-\item Do isomers (same elements arranged differently) exist? What is
-the minimum order?
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_7.pdf}}
+\end{center}
 
-See pp\_isomer\_sigs; there seem to exist isomers for each order geq
-7, can use pp\_isomer\_sigs to count the number of isomer classes
-for each order. Another sequence...
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_8.pdf}}
+\end{center}
 
-\item Do disjoint-ntuples exist (same size triangles, same number of
-elements, all different sizes) can we make the equivalent of compound
-perfect squares with compound perfect triangled triangles composed
-of disjoint n-tuples?
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_9.pdf}}
+\end{center}
 
-\item What is the smallest order compound triangled triangle that can
-be made? (I guess it would be 29, Tuttes order 15 enlarged and put
-inside itself, unless there's another way to do it with fewer squares,
-i havnt really thought about it)
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_10.pdf}}
+\end{center}
 
-\item What is the smallest triangle that can exist on a corner, or
-on the boundary? (for squared squares its 5 on the boundary and 9
-on a corner and those squares are extremely rare, order 44, Gambini
-found them)
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_11.pdf}}
+\end{center}
 
-\item Can the largest element be completely in the interior? (this
-is possible for squared squares) If possible, smallest order?
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_12.pdf}}
+\end{center}
 
-Yes, two examples of order 18, see pp\_largest\_in\_interior.cpp
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_13.pdf}}
+\end{center}
 
-\item How high can you get in ratio between the smallest element and
-the largest? (try to make or find a tiling where the smallest element
-is as large as possible (compared to the largest)
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_14.pdf}}
+\end{center}
 
-See ./pp\_ratio\_spectrum.cpp for a count of all ratios of largest/smallest.
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_15.pdf}}
+\end{center}
 
-See also pp\_plot\_ratio\_spectrum.py for plotting the output of ./pp\_ratio\_spectrum.cpp 
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_16.pdf}}
+\end{center}
 
-\item What is the distribution of odd and even elements by order?
-is the distribution mod 3 more relevant?
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_17.pdf}}
+\end{center}
 
-\item What is the distribution of prime numbers as triangle elements?
-(squared square elements appear to have a normal distribution) Lots
-of questions....
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_18.pdf}}
+\end{center}
 
-\end{itemize}
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_19.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_20.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_21.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_22.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_23.pdf}}
+\end{center}
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_24.pdf}}
+\end{center}
 
 \clearpage
-\subsection*{B.1 blah}
+The next plot shows the number of triangle elements with given side, across all $4 \leq n \leq 24$.
+
+\begin{center}
+\resizebox{12cm}{!}{\includegraphics{pp_element_sizes_all.pdf}}
+\end{center}
+
+\subsection{Isomers}
+
+Question: do isomers (same elements arranged differently)
+exist, and if so, what is the minimum order? We can answer this affirmatively; for order greater than 7 there
+exist isomers. The list of isomer classes is given below (refer to
+\texttt{pp\_isomer\_sigs.cpp} in \cite{githubrepo} for computational
+details).
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline $n$ & \# isomer classes \\
+\hline
+\hline 4  & 1               \\
+\hline 6  & 1               \\
+\hline 7  & 1               \\
+\hline 8  & 2               \\
+\hline 9  & 3               \\
+\hline 10 & 6               \\
+\hline 11 & 15              \\
+\hline 12 & 30              \\
+\hline 13 & 81              \\
+\hline 14 & 213             \\
+\hline 15 & 629             \\
+\hline 16 & 1863            \\
+\hline 17 & 5826            \\
+\hline 18 & 18522           \\
+\hline 19 & 60188           \\
+\hline 20 & 198261          \\
+\hline 21 & 660864          \\
+\hline 22 & 2225185         \\
+\hline 23 & 7545566         \\
+\hline 24 & 25773258        \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Largest element in the interior}
+
+Question: Can the largest element be completely in the interior? (This
+is possible for squared squares.) 
+See \texttt{pp\_largest\_in\_interior.cpp} in \cite{githubrepo}.
+The four smallest dissections with this property are of order $18$:
+
+\begin{center}
+\includegraphics{largest_interior_n18_0.pdf}~\hspace{2cm}~\includegraphics{largest_interior_n18_1.pdf}
+\end{center}
+
+\begin{center}
+\includegraphics{largest_interior_n18_2.pdf}~\hspace{2cm}~\includegraphics{largest_interior_n18_3.pdf}
+\end{center}
+
+\subsection{Ratio of largest to smallest element}
+
+Question: What is the distribution for the ratio between the smallest element and
+the largest element of a dissection? See \texttt{pp\_ratio\_spectrum.cpp} 
+and \texttt{pp\_plot\_ratio\_spectrum.py} in \cite{githubrepo}. For each
+$n$ we plot the frequency of the ratio of the largest to the smallest triangle:
 
 \begin{center}
 \resizebox{12cm}{!}{\includegraphics{pp_ratio_spectrum_4.pdf}}
@@ -1310,8 +1241,204 @@ of questions....
 \resizebox{12cm}{!}{\includegraphics{pp_ratio_spectrum_24.pdf}}
 \end{center}
 
+\clearpage
+
+% FIXME Up to here
+
+Question: Do disjoint-ntuples exist (same size triangles, same number of
+elements, all different sizes) can we make the equivalent of compound
+perfect squares with compound perfect triangled triangles composed
+of disjoint n-tuples?
+
+Question: What is the smallest order compound triangled triangle that can
+be made? (I guess it would be 29, Tuttes order 15 enlarged and put
+inside itself, unless there's another way to do it with fewer squares,
+i havnt really thought about it)
+
+Question: What is the smallest triangle that can exist on a corner, or
+on the boundary? (for squared squares its 5 on the boundary and 9
+on a corner and those squares are extremely rare, order 44, Gambini
+found them)
+
+
+Question: What is the distribution of odd and even elements by order?
+is the distribution mod 3 more relevant?
+
+Question: What is the distribution of prime numbers as triangle elements?
+(squared square elements appear to have a normal distribution) Lots
+of questions....
+
+
+
 
 \subsection*{B.2 bleh}
+
+
+\clearpage
+
+%\bibliographystyle{elsarticle-num}
+%\bibliography{dissection_enumeration}
+
+\begin{thebibliography}{10}
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
+
+\bibitem{plantri}
+G.~Brinkmann, B.~D. McKay, plantri (software),
+  \url{http://cs.anu.edu.au/∼bdm/plantri}.
+
+\bibitem{plantri2}
+G.~Brinkmann, B.~D. McKay, Fast generation of some classes of planar
+graphs, Electronic Notes in Discrete Mathematics 3 (1999) 28--31.
+  \url{http://cs.anu.edu.au/∼bdm/plantri}.
+
+\bibitem{MR0003040}
+R.~L. Brooks, C.~A.~B. Smith, A.~H. Stone, W.~T. Tutte, The dissection of
+  rectangles into squares, Duke Math. J. 7 (1940) 312--340.
+
+\bibitem{planareulerian}
+N.~J. Cavenagh, P.~Lison\v ek, Planar eulerian triangulations are equivalent to
+  spherical latin bitrades, J. Comb. Theory, Ser. A 115~(1) (2008) 193--197.
+
+\bibitem{nickWanlessBlah}
+N.~J. Cavenagh, I.~M. Wanless, Latin trades in groups defined on planar
+  triangulations, J. Algebraic Combin. 30 (2009) 323--347.
+
+\bibitem{wanlesshandbook}
+C.~J. Colbourn, J.~H. Dinitz, I.~M. Wanless, Handbook of combinatorial designs,
+  Chapman \& Hall/CRC, Boca Raton, FL, 2007.
+
+\bibitem{alesnew}
+A.~Dr{\'a}pal, Dissections of equilateral triangles and pointed spherical latin
+  bitrades, submitted.
+
+\bibitem{ales-geometrical}
+A.~Dr{\'a}pal, Geometrical structure and construction of latin trades, Advances
+  in Geometry 9~(3) (2009) 311--348.
+
+\bibitem{Dr9}
+A.~Dr{\'a}pal, Geometry of latin trades, manuscript circulated at the
+  conference Loops, Prague (2003).
+
+\bibitem{aleshamming}
+A.~Dr{\'a}pal, Hamming distances of groups and quasi-groups, Discrete Math.
+  235~(1-3) (2001) 189--197, combinatorics (Prague, 1998).
+
+\bibitem{alesdissections}
+A.~Dr{\'a}pal, V.~Kala, C.~H\"{a}m\"{a}l\"{a}inen, Latin bitrades,
+  dissections of equilateral triangles and abelian groups,
+  Journal of Combinatorial Designs, Volume 18 Issue 1 (2010), 1--24.
+
+\bibitem{hamalainen2007}
+C.~H\"{a}m\"{a}l\"{a}inen, Latin bitrades and related structures, {PhD} in
+  {M}athematics, Department of Mathematics, The University of Queensland,
+  http://carlo-hamalainen.net/phd/hamalainen-20071025.pdf (2007).
+
+\bibitem{code}
+C.~H\"{a}m\"{a}l\"{a}inen, Spherical bitrade enumeration code,
+  \url{http://bitbucket.org/carlohamalainen/spherical}.
+
+\bibitem{dissections}
+C.~H\"{a}m\"{a}l\"{a}inen,
+Triangle dissections code (depracated),
+  \url{http://bitbucket.org/carlohamalainen/dissections}.
+
+\bibitem{githubrepo}
+C.~H\"{a}m\"{a}l\"{a}inen,
+Triangle dissections code,
+  \url{https://github.com/carlohamalainen/triangle\_dissections}.
+
+\bibitem{MR1092545}
+M.~Laczkovich, Tilings of polygons with similar triangles, Combinatorica 10~(3)
+  (1990) 281--306.
+
+\bibitem{MR1794696}
+J.~D. Skinner, C.~A.~B. Smith, W.~T. Tutte, On the dissection of rectangles
+  into right-angled isosceles triangles, J. Combin. Theory Ser. B 80~(2) (2000)
+  277--319.
+
+\bibitem{squaring}
+Tiling by similar triangles, \url{http://www.squaring.net/tri/twt.html}.
+
+\bibitem{MR0027521}
+W.~T. Tutte, The dissection of equilateral triangles into equilateral
+  triangles, Proc. Cambridge Philos. Soc. 44 (1948) 463--482.
+
+\bibitem{wanlessenumeration}
+Ian~M. Wanless.
+\newblock A computer enumeration of small {L}atin trades.
+\newblock {\em Australas. J. Combin.}, 39:247--258, 2007.
+
+
+\end{thebibliography}
+
+\appendix*{Appendix A: Triangle dissections}
+
+Here we present representatives of the isomorphism classes of triangle
+dissections of size $n \in \{4, 6, 7, 8, 9, 10 \}$.
+
+%Unused now
+%\input{data_unique_dissections.tex}
+
+\subsection*{$n = 4$}
+
+\includegraphics{output-dissections-dissection4_i36_r3_c1.pdf}
+
+\subsection*{$n = 6$}
+
+\includegraphics{output-dissections-dissection6_i41_r1_c3.pdf}
+
+\subsection*{$n = 7$}
+
+\includegraphics{output-dissections-dissection7_i27_r3_c2.pdf}
+\includegraphics{output-dissections-dissection7_i29_r1_c2.pdf}
+
+\subsection*{$n = 8$}
+
+\includegraphics{output-dissections-dissection8_i31_r2_c4.pdf}
+\includegraphics{output-dissections-dissection8_i37_r2_c2.pdf}
+\includegraphics{output-dissections-dissection8_i37_r2_c4.pdf}
+
+\subsection*{$n = 9$}
+
+\includegraphics{output-dissections-dissection9_i10_r0_c2.pdf}
+\includegraphics{output-dissections-dissection9_i10_r0_c3.pdf}
+\includegraphics{output-dissections-dissection9_i10_r2_c2.pdf}
+\includegraphics{output-dissections-dissection9_i11_r0_c3.pdf}
+\includegraphics{output-dissections-dissection9_i11_r1_c0.pdf}
+\includegraphics{output-dissections-dissection9_i11_r1_c3.pdf}
+\includegraphics{output-dissections-dissection9_i13_r2_c1.pdf}
+\includegraphics{output-dissections-dissection9_i13_r2_c3.pdf}
+\includegraphics{output-dissections-dissection9_i45_r0_c0.pdf}
+
+\subsection*{$n = 10$}
+
+\includegraphics{output-dissections-dissection10_i15_r4_c1.pdf}
+\includegraphics{output-dissections-dissection10_i17_r1_c0.pdf}
+\includegraphics{output-dissections-dissection10_i17_r1_c1.pdf}
+\includegraphics{output-dissections-dissection10_i17_r3_c0.pdf}
+\includegraphics{output-dissections-dissection10_i17_r3_c1.pdf}
+\includegraphics{output-dissections-dissection10_i17_r3_c2.pdf}
+\includegraphics{output-dissections-dissection10_i19_r2_c3.pdf}
+\includegraphics{output-dissections-dissection10_i19_r3_c1.pdf}
+\includegraphics{output-dissections-dissection10_i19_r3_c3.pdf}
+\includegraphics{output-dissections-dissection10_i21_r1_c2.pdf}
+\includegraphics{output-dissections-dissection10_i21_r1_c3.pdf}
+\includegraphics{output-dissections-dissection10_i21_r2_c2.pdf}
+\includegraphics{output-dissections-dissection10_i21_r2_c3.pdf}
+\includegraphics{output-dissections-dissection10_i23_r3_c0.pdf}
+\includegraphics{output-dissections-dissection10_i23_r3_c1.pdf}
+\includegraphics{output-dissections-dissection10_i23_r3_c2.pdf}
+\includegraphics{output-dissections-dissection10_i25_r0_c0.pdf}
+\includegraphics{output-dissections-dissection10_i25_r1_c0.pdf}
+\includegraphics{output-dissections-dissection10_i25_r1_c3.pdf}
+\includegraphics{output-dissections-dissection10_i26_r0_c3.pdf}
+\includegraphics{output-dissections-dissection10_i29_r2_c0.pdf}
+\includegraphics{output-dissections-dissection10_i29_r2_c3.pdf}
+\includegraphics{output-dissections-dissection10_i45_r3_c1.pdf}
 
 \end{document}
 

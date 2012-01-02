@@ -1,0 +1,5 @@
+
+PDFs generated using the command:
+
+    python ../../plot/draw_dissection.py < ../pp_largest_in_interior.out_18
+    rename 's/n18_sig_/largest_interior_n18_/' n18*pdf
