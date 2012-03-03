@@ -6,7 +6,7 @@ N=$1
 slice=$2
 nr_slices=$3
 
-cat binary_bitrades_${N}_${slice}_${nr_slices} | /home/carlo/work/github/triangle_dissections/dissections-cpp/td --separated sigs_${slice}_
+cat binary_bitrades_${N}_${slice}_${nr_slices} | /home/carlo/work/github/triangle_dissections/dissections-cpp/td --separated-and-nonseparated > sigs_${slice}_out_${N}
 
 if [ "$?" -ne 0 ]; then
     exit 1

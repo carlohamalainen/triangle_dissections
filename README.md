@@ -1,3 +1,6 @@
+Triangle Dissection Enumeration
+===============================
+
 This repo contains code that supports the paper "An enumeration of
 equilateral triangle dissections", Ales Drapal and Carlo Hamalainen,
 Discrete Applied Mathematics Volume 158, Issue 14, 28 July 2010,
@@ -6,12 +9,22 @@ available on the arXiv: http://arxiv.org/abs/0910.5199
 
 Carlo Hamalainen <carlo.hamalainen@gmail.com>
 
-2011-05-28
+Summary of contents
+-------------------
 
----------------------------------------------------------------
+ * dissections-clojure          Implementation in Clojure     (for testing only)
+ * dissections-common-lisp      Implementation in Common Lisp (for testing only)
+ * dissections-cpp              Implementation in C++         (for actual enumeration runs)
+ * dissections-sage             Original implementation in Sage (useful for exploratory work)
+ * paper                        Copy of the arXiv paper
+ * plot                         Python script (uses PyX) for drawing triangle dissections
+ * spherical_bitrade_generator  Enumerator of spherical latin bitrades (uses "plantri")
 
-Example for running an enumeration of order 20 with 100 slices, with
-output going to /scratch/triangles/...
+How to run
+----------
+
+To run the enumerator for order 18 with 5 slices, output
+going to /scratch/triangles/expt_18:
 
     git clone https://github.com/carlohamalainen/triangle_dissections.git
     cd triangle_dissections
@@ -21,10 +34,13 @@ If this fails due to not being able to find the Boost C++ library, set its
 location in triangle_dissections/dissections-cpp/Makefile
 and then re-run make in the top-level directory.
 
+Now create a directory for this run of order 18 with 5 slices, and set up
+the Makefile which will run the main part of the enumeration:
+
     cd dissections-cpp/example_run_directories
 
-    N=20
-    NRSLICES=100
+    N=18
+    NRSLICES=5
 
     SRCDIR=`pwd`
 
@@ -50,7 +66,16 @@ following script:
 
     ./sort_and_merge_sigs.sh $N
 
-This will produce the file $OUTPUT_DIRECTORY/all_sigs_$N.
+This will produce the file $OUTPUT_DIRECTORY/all_sigs_$N. This file can be used with
+post-processing scripts, or to answer simple questions like "how many dissections are
+there of order 18?":
+
+    cat all_sigs_$N | wc -l
+
+The answer should be:
+
+    235734
+
 
 
 

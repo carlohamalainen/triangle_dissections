@@ -13,11 +13,8 @@
 
 using namespace std;
 
-#define MAX_OUTPUT_NR 50
-
 // <globals>
 bool only_separated;
-FILE * output_files[MAX_OUTPUT_NR+1];
 // </globals>
 
 
@@ -448,19 +445,9 @@ void print_list_of_12lists(FILE *f, vector<vector<Rational> > lists)
     fprintf(f, "\n");
 }
 
-void print_canonical_signature(vector<vector<Point> > &triangles, const char *output_prefix)
+void print_canonical_signature(vector<vector<Point> > &triangles)
 {
     const unsigned int n = triangles.size();
-
-    if (output_files[n] == NULL) {
-        char filename[1000];
-        sprintf(filename, "%sout_%d", output_prefix, n);
-
-        output_files[n] = fopen(filename, "a");
-    }
-    // fprintf(stderr, "%d\n", n);
-
-    assert(output_files[n] != NULL);
 
     // Transform the input points to the equilateral space.
     transform_triangles_to_equilateral(triangles);
@@ -527,19 +514,17 @@ void print_canonical_signature(vector<vector<Point> > &triangles, const char *ou
 
     sort(all_images.begin(), all_images.end());
 
-    assert(output_files[n] != NULL);
-    print_list_of_12lists(output_files[n], all_images[0]);
+    print_list_of_12lists(stdout, all_images[0]);
 }
 
 int main(int argc, const char* argv[])
 {
-    if (argc != 3) {
-        fprintf(stderr, "Usage: just the separated dissections: td --separated <prefix>\nseparated and nonseparated dissections: td --separated-and-nonseparated <prefix>\n\n");
+    if (argc != 2) {
+        fprintf(stderr, "Usage: just the separated dissections: td --separated\nseparated and nonseparated dissections: td --separated-and-nonseparated\n\n");
         exit(1);
     }
 
     const char *sep_or_nonsep = argv[1];
-    const char *output_prefix = argv[2];
 
     if (strcmp(sep_or_nonsep, "--separated") == 0) {
        only_separated = true;
@@ -549,9 +534,6 @@ int main(int argc, const char* argv[])
         fprintf(stderr, "Usage: just the separated dissections: td --separated <prefix>\nseparated and nonseparated dissections: td --separated-and-nonseparated <prefix>\n\n");
         exit(1);
     }
-
-    for(int i = 0; i <= MAX_OUTPUT_NR; i++)
-        output_files[i] = NULL;
 
     int nr_rows, nr_cols, nr_syms, nr_elements;
     vector<Triple> T1, T2;
@@ -581,7 +563,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            print_canonical_signature(triangles, output_prefix);
+            print_canonical_signature(triangles);
         }
 
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
@@ -592,7 +574,7 @@ int main(int argc, const char* argv[])
             #if 0
             printf("solution: ");
             for(vector<Rational>::iterator ratIter = solution.begin(); ratIter != solution.end(); ratIter++) {
-                print_rational(*ratIter); printf(" ");
+                print_rational(stdout, *ratIter); printf(" ");
             }
             printf("\n");
             #endif
@@ -608,7 +590,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
            
-            print_canonical_signature(triangles, output_prefix);
+            print_canonical_signature(triangles);
         }
     }
 
