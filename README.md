@@ -12,13 +12,13 @@ Carlo Hamalainen <carlo.hamalainen@gmail.com>
 Summary of contents
 -------------------
 
- * dissections-clojure          Implementation in Clojure     (for testing only)
- * dissections-common-lisp      Implementation in Common Lisp (for testing only)
- * dissections-cpp              Implementation in C++         (for actual enumeration runs)
- * dissections-sage             Original implementation in Sage (useful for exploratory work)
- * paper                        Copy of the arXiv paper
- * plot                         Python script (uses PyX) for drawing triangle dissections
- * spherical_bitrade_generator  Enumerator of spherical latin bitrades (uses "plantri")
+ * dissections-clojure:         Implementation in Clojure     (for testing only)
+ * dissections-common-lisp:     Implementation in Common Lisp (for testing only)
+ * dissections-cpp:             Implementation in C++         (for actual enumeration runs)
+ * dissections-sage:            Original implementation in Sage (useful for exploratory work)
+ * paper:                       Copy of the arXiv paper
+ * plot:                        Python script (uses PyX) for drawing triangle dissections
+ * spherical_bitrade_generator: Enumerator of spherical latin bitrades (uses "plantri")
 
 How to run
 ----------
