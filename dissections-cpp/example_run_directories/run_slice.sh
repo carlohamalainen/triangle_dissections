@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -o nounset
+
 N=$1
 slice=$2
 nr_slices=$3
