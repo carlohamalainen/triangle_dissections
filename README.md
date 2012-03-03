@@ -58,7 +58,7 @@ the Makefile which will run the main part of the enumeration:
 To run the first part of the enumeration, use the Makefile with a suitable 
 number of threads, say 14 on a 16 core PC:
 
-    make -j 14
+    make -j 14 # this would be at most the minimum of nr cores in PC and nr slices being produced
 
 Once this finishes there will be $NRSLICES files of the form sigs_<slice nr>.
 To merge them into a single file containing a unique list of signatures, run the
@@ -74,8 +74,4 @@ there of order 18?":
 
 The answer should be:
 
-    235734
-
-
-
-
+    224708

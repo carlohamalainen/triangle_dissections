@@ -445,9 +445,13 @@ void print_list_of_12lists(FILE *f, vector<vector<Rational> > lists)
     fprintf(f, "\n");
 }
 
-void print_canonical_signature(vector<vector<Point> > &triangles)
+void print_canonical_signature(vector<vector<Point> > &triangles, const unsigned int T1_size)
 {
     const unsigned int n = triangles.size();
+
+    // If this is a smaller dissection, don't print it. We know that this dissection
+    // will be produced by a smaller bitrade.
+    if (T1_size != n) return;
 
     // Transform the input points to the equilateral space.
     transform_triangles_to_equilateral(triangles);
@@ -563,7 +567,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
 
-            print_canonical_signature(triangles);
+            print_canonical_signature(triangles, T1.size());
         }
 
         for(vector<Triple>::iterator tIter = T2.begin(); tIter != T2.end(); tIter++) {
@@ -590,7 +594,7 @@ int main(int argc, const char* argv[])
             printf("\n");
             #endif
            
-            print_canonical_signature(triangles);
+            print_canonical_signature(triangles, T1.size());
         }
     }
 
