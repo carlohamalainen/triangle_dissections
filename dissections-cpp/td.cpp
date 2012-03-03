@@ -533,80 +533,6 @@ void print_canonical_signature(vector<vector<Point> > &triangles, const char *ou
 
 int main(int argc, const char* argv[])
 {
-
-    vector<Triple> X1;
-
-    Triple t;
-
-    // t.X1 =
-    // [ 0  1  2  3]
-    // [ 1 -1 -1  0]
-    // [-1  2  3  1]
-    // [-1 -1 -1 -1]
-    t = {0, 0, 0}; X1.push_back(t);
-    t = {0, 1, 1}; X1.push_back(t);
-    t = {0, 2, 2}; X1.push_back(t);
-    t = {0, 3, 3}; X1.push_back(t);
-    t = {1, 3, 0}; X1.push_back(t);
-    t = {1, 0, 1}; X1.push_back(t);
-    t = {2, 3, 1}; X1.push_back(t);
-    t = {2, 1, 2}; X1.push_back(t);
-    t = {2, 2, 3}; X1.push_back(t);
-
-#if 0
-    int nr_rows = 3, nr_cols = 4, nr_syms = 4, nr_elements = 9;
-
-    vector<Triple> T1, T2;
-
-    Triple t;
-
-    // t.T1 =
-    // [ 0  1  2  3]
-    // [ 1 -1 -1  0]
-    // [-1  2  3  1]
-    // [-1 -1 -1 -1]
-    t = {0, 0, 0}; T1.push_back(t);
-    t = {0, 1, 1}; T1.push_back(t);
-    t = {0, 2, 2}; T1.push_back(t);
-    t = {0, 3, 3}; T1.push_back(t);
-    t = {1, 0, 1}; T1.push_back(t);
-    t = {1, 3, 0}; T1.push_back(t);
-    t = {2, 1, 2}; T1.push_back(t);
-    t = {2, 2, 3}; T1.push_back(t);
-    t = {2, 3, 1}; T1.push_back(t);
-
-    // t.T2 =
-    // [ 1  2  3  0]
-    // [ 0 -1 -1  1]
-    // [-1  1  2  3]
-    // [-1 -1 -1 -1]
-    t = {0, 0, 1}; T2.push_back(t);
-    t = {0, 1, 2}; T2.push_back(t);
-    t = {0, 2, 3}; T2.push_back(t);
-    t = {0, 3, 0}; T2.push_back(t);
-    t = {1, 0, 0}; T2.push_back(t);
-    t = {1, 3, 1}; T2.push_back(t);
-    t = {2, 1, 1}; T2.push_back(t);
-    t = {2, 2, 2}; T2.push_back(t);
-    t = {2, 3, 3}; T2.push_back(t);
-
-    vector<Rational> solution(3 + T1.size() - 1);
-    only_separated = false;
-
-    for(vector<Triple>::iterator tIter = T1.begin(); tIter != T1.end(); tIter++) {
-        printf("(r, c) = (%d, %d)\n", tIter->r, tIter->c);
-
-        calculate_bitrade_solution(nr_rows, nr_cols, nr_syms, *tIter, T1, T2, solution);
-        printf("solution: ");
-        for(vector<Rational>::iterator ratIter = solution.begin(); ratIter != solution.end(); ratIter++) {
-            print_rational(stdout, *ratIter); printf(" ");
-        }
-        printf("\n");
-    }
-
-    // if (only_separated && !is_separated_solution(solution, nr_rows, nr_cols, nr_syms)) continue;
-#endif
-
     if (argc != 3) {
         fprintf(stderr, "Usage: just the separated dissections: td --separated <prefix>\nseparated and nonseparated dissections: td --separated-and-nonseparated <prefix>\n\n");
         exit(1);
@@ -631,25 +557,6 @@ int main(int argc, const char* argv[])
     vector<Triple> T1, T2;
 
     while(read_bitrade(nr_rows, nr_cols, nr_syms, nr_elements, T1, T2)) {
-        // printf("%d %d %d %d\n", nr_rows, nr_cols, nr_syms, nr_elements);
-
-        #if 0
-        assert(T1.size() == X1.size());
-
-        
-        bool same = true;
-        for(unsigned int i = 0; i < T1.size(); i++) {
-            if (T1[i].r != X1[i].r) same = false;
-            if (T1[i].c != X1[i].c) same = false;
-            if (T1[i].s != X1[i].s) same = false;
-            printf("(%d, %d, %d)\n", T1[i].r, T1[i].c, T1[i].s);
-        }
-        printf("\n");
-
-        if (same) printf("same!\n");
-        #endif
-
-
         for(vector<Triple>::iterator tIter = T1.begin(); tIter != T1.end(); tIter++) {
             vector<Rational> solution(3 + T1.size() - 1);
             calculate_bitrade_solution(nr_rows, nr_cols, nr_syms, *tIter, T1, T2, solution);
@@ -707,7 +614,5 @@ int main(int argc, const char* argv[])
 
     return 0;
 }
-
-
 
 
