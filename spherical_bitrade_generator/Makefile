@@ -27,6 +27,10 @@ spherical_bitrades_upto_14: spherical_trades spherical_trades_binary
 	./spherical_trades_binary -b -u 14 > binary_spherical_bitrades_12
 	./spherical_trades_binary -b -u 15 > binary_spherical_bitrades_13
 	./spherical_trades_binary -b -u 16 > binary_spherical_bitrades_14
+	./spherical_trades_binary -b -u 17 > binary_spherical_bitrades_15
+	./spherical_trades_binary -b -u 18 > binary_spherical_bitrades_16
+	./spherical_trades_binary -b -u 19 > binary_spherical_bitrades_17
+	./spherical_trades_binary -b -u 20 > binary_spherical_bitrades_18
 	touch spherical_bitrades_upto_14
 	
 clean:

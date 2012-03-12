@@ -24,7 +24,7 @@ How to run
 ----------
 
 To run the enumerator for order 18 with 5 slices, output
-going to /scratch/triangles/expt_18:
+going to /tmp/triangles/expt_18:
 
     git clone https://github.com/carlohamalainen/triangle_dissections.git
     cd triangle_dissections
@@ -44,7 +44,7 @@ the Makefile which will run the main part of the enumeration:
 
     SRCDIR=`pwd`
 
-    OUTPUT_DIRECTORY=/scratch/triangles/expt_$N
+    OUTPUT_DIRECTORY=/tmp/triangles/expt_$N
 
     mkdir -p $OUTPUT_DIRECTORY
     cd $OUTPUT_DIRECTORY

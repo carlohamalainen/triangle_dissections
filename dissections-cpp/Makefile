@@ -1,6 +1,6 @@
 BOOST_PATH = /home/carlo/opt/boost_1_47_0/
 
-all: td aut_groups pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs pp_perfect_dissections
+all: td aut_groups pp_triangle_sizes pp_dissection_element_sizes pp_largest_in_interior pp_ratio_spectrum pp_isomer_sigs pp_perfect_dissections find_nonsep_sig_problem
 
 td: td.cpp td.h ratlib.h
 	g++ -Wall -O4 -I$(BOOST_PATH) td.cpp -o td
@@ -25,6 +25,9 @@ pp_isomer_sigs: pp_isomer_sigs.cpp td.h ratlib.h
 
 pp_perfect_dissections: pp_perfect_dissections.cpp td.h ratlib.h
 	g++ -Wall -O4 -I$(BOOST_PATH) -lm pp_perfect_dissections.cpp -o pp_perfect_dissections
+
+find_nonsep_sig_problem: find_nonsep_sig_problem.cpp td.h ratlib.h
+	g++ -Wall -O4 -I$(BOOST_PATH) -lm find_nonsep_sig_problem.cpp -o find_nonsep_sig_problem
 
 clean:
 	rm -f td pp_dissection_element_sizes pp_largest_in_interior pp_triangle_sizes pp_ratio_spectrum pp_isomer_sigs separated_test_out_*
