@@ -194,10 +194,7 @@ a situation arises for no dissecting line and if no
 dissecting vertex is incident to six dissecting triangles,
 then we call the dissection {\em separated}.
 We enumerate all isomorphism classes of 
-separated dissections up to size $24$ and provide lower 
-bounds\footnote{The original version of this paper reported the counts for nonseparated dissections
-as exact numbers, but this was incorrect due to the way that the code was implemented.}
-on the numer of nonseparated dissections up to size $20$.
+separated and nonseparated dissections up to size $24$.
 Sections \ref{sec:range-of-sides} to \ref{fixme:last} contain computational results to questions suggested
 by Stuart Anderson\footnote{\texttt{stuart.errol.anderson@gmail.com} and
 \url{http://www.squaring.net/}} (personal communication with Carlo H\"{a}m\"{a}l\"{a}inen).
@@ -708,7 +705,7 @@ automorphism group of order $k$.}
 \hline
 \end{tabular}
 \end{center}
-\caption{Lower bounds on the number of separated and nonseparated dissections of size $n$, up to isomorphism.
+\caption{Number of separated and nonseparated dissections of size $n$, up to isomorphism.
 For each $n$, the column $A(n,k)$
 records the number of dissections of size $n$ with
 automorphism group of order $k$.}
@@ -803,6 +800,7 @@ of perfect dissections:
 It is an open problem to determine if there exists a nonseparated
 perfect dissection. If such a dissection exists then it will have size
 greater than $20$.
+% FIXME Check this with the new code; size will be >= 24 then.
 
 \subsection{Other observations}
 
@@ -1267,12 +1265,6 @@ is the distribution mod 3 more relevant?
 Question: What is the distribution of prime numbers as triangle elements?
 (squared square elements appear to have a normal distribution) Lots
 of questions....
-
-
-
-
-\subsection*{B.2 bleh}
-
 
 \clearpage
 

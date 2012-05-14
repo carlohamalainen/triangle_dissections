@@ -224,6 +224,7 @@ vector<Point> reflect3_on_triangle(vector<Point> triangle)
 
 void sort_individual_triangles(vector<vector<Point> > &triangles)
 {
+    return; // FIXME why are we doing this still???
     for(unsigned int i = 0; i < triangles.size(); i++) {
         sort(triangles.at(i).begin(), triangles.at(i).end());
     }
@@ -231,15 +232,31 @@ void sort_individual_triangles(vector<vector<Point> > &triangles)
 
 vector<Rational> triangle_to_12list(vector<Point> triangle)
 {
-    vector<Rational> result;
+    vector< vector<Rational> > tmp;
 
     assert(triangle.size() == 3);
 
     for(unsigned int t = 0; t < 3; t++) {
-        result.push_back(triangle.at(t).x.a);
-        result.push_back(triangle.at(t).x.b);
-        result.push_back(triangle.at(t).y.a);
-        result.push_back(triangle.at(t).y.b);
+        vector<Rational> tmp_triangle;
+
+        tmp_triangle.push_back(triangle.at(t).x.a);
+        tmp_triangle.push_back(triangle.at(t).x.b);
+        tmp_triangle.push_back(triangle.at(t).y.a);
+        tmp_triangle.push_back(triangle.at(t).y.b);
+        tmp.push_back(tmp_triangle);
+    }
+
+    sort(tmp.begin(), tmp.end());
+
+    vector<Rational> result;
+
+    for(unsigned int t = 0; t < 3; t++) {
+        assert(tmp.at(t).size() == 4);
+
+        result.push_back(tmp.at(t).at(0));
+        result.push_back(tmp.at(t).at(1));
+        result.push_back(tmp.at(t).at(2));
+        result.push_back(tmp.at(t).at(3));
     }
 
     return result;

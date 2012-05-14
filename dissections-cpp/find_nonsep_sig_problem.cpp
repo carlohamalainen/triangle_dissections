@@ -45,6 +45,14 @@ int main()
         vector<string> unique_points;
         unique_points.assign(s.begin(), s.end());
 
+        #if 0
+        cout << "zzz ";
+        for(unsigned int i = 0; i < unique_points.size(); i++) {
+            cout << unique_points.at(i) << " ";
+        }
+        cout << endl;
+        #endif
+
         if (sig_map.find(unique_points) != sig_map.end()) {
             sig_map[unique_points].push_back(line);
         } else {
@@ -55,14 +63,39 @@ int main()
     }
 
     for(map<vector<string>, vector<string> >::iterator iter = sig_map.begin(); iter != sig_map.end(); iter++) {
+        vector<string> csig = iter->first;
+
+        for(vector<string>::iterator siter = csig.begin(); siter != csig.end(); siter++) {
+            cout << *siter << " ";
+        }
+        cout << endl;
+    }
+
+    // print one line of each
+    #if 0
+    for(map<vector<string>, vector<string> >::iterator iter = sig_map.begin(); iter != sig_map.end(); iter++) {
+        vector<string> original_lines = iter->second;
+
+        for(vector<string>::iterator siter = original_lines.begin(); siter != original_lines.end(); siter++) {
+            cout << *siter << " " << endl; // need a trailing space to compare against the main enumeration code
+            break;
+        }
+    }
+    #endif
+
+    #if 0
+    for(map<vector<string>, vector<string> >::iterator iter = sig_map.begin(); iter != sig_map.end(); iter++) {
         if (iter->second.size() > 1) {
             vector<string> original_lines = iter->second;
+
+            cout << "nr in this set: " << iter->second.size() << endl;
 
             for(vector<string>::iterator siter = original_lines.begin(); siter != original_lines.end(); siter++) {
                 cout << *siter << endl;
             }
         }
     }
+    #endif
 
     return 0;
 }
