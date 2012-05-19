@@ -48,13 +48,6 @@ int aut_group_size(vector<vector<Point> > &triangles)
     transform(triangles.begin(), triangles.end(), reflect2_image.begin(),       reflect2_on_triangle);
     transform(triangles.begin(), triangles.end(), reflect3_image.begin(),       reflect3_on_triangle);
 
-    sort_individual_triangles(identity_image);
-    sort_individual_triangles(rot_image);
-    sort_individual_triangles(rot_inverse_image);
-    sort_individual_triangles(reflect1_image);
-    sort_individual_triangles(reflect2_image);
-    sort_individual_triangles(reflect3_image);
-
     vector<vector<Rational> > identity_image_12lists(n), rot_image_12lists(n), rot_inverse_image_12lists(n),
                               reflect1_image_12lists(n), reflect2_image_12lists(n), reflect3_image_12lists(n);
 

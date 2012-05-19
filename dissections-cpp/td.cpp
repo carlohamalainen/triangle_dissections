@@ -462,18 +462,11 @@ void print_canonical_signature(vector<vector<Point> > &triangles, const unsigned
     vector<vector<Point> > rot_image(n), rot_inverse_image(n), reflect1_image(n), reflect2_image(n), reflect3_image(n);
 
     // Calculate the images under the group S_3.
-    transform(triangles.begin(), triangles.end(), rot_image.begin(),        rotate_equilateral_on_triangle_points);
-    transform(triangles.begin(), triangles.end(), rot_inverse_image.begin(),        rotate_equilateral_on_triangle_points_inverse);
-    transform(triangles.begin(), triangles.end(), reflect1_image.begin(),   reflect1_on_triangle);
-    transform(triangles.begin(), triangles.end(), reflect2_image.begin(),   reflect2_on_triangle);
-    transform(triangles.begin(), triangles.end(), reflect3_image.begin(),   reflect3_on_triangle);
-
-    sort_individual_triangles(identity_image);
-    sort_individual_triangles(rot_image);
-    sort_individual_triangles(rot_inverse_image);
-    sort_individual_triangles(reflect1_image);
-    sort_individual_triangles(reflect2_image);
-    sort_individual_triangles(reflect3_image);
+    transform(triangles.begin(), triangles.end(), rot_image.begin(),            rotate_equilateral_on_triangle_points);
+    transform(triangles.begin(), triangles.end(), rot_inverse_image.begin(),    rotate_equilateral_on_triangle_points_inverse);
+    transform(triangles.begin(), triangles.end(), reflect1_image.begin(),       reflect1_on_triangle);
+    transform(triangles.begin(), triangles.end(), reflect2_image.begin(),       reflect2_on_triangle);
+    transform(triangles.begin(), triangles.end(), reflect3_image.begin(),       reflect3_on_triangle);
 
     // A point (x, y) is equivalent to a 4-tuple (xa, xb, ya, yb).
     // I want to store the whole triangle in the canonical signature, so that's going to be 3 4-tuples:

@@ -1,0 +1,48 @@
+
+The code here supports the computational component of the following
+paper:
+
+Title: An enumeration of equilateral triangle dissections
+
+Authors: Ales Drapal, Carlo Hamalainen
+
+Journal: Discrete Applied Mathematics, Volume 158, Issue 14, 28 July
+2010, Pages 1479-1495
+
+Abstract: We enumerate all dissections of an equilateral triangle into
+smaller equilateral triangles up to size 20, where each triangle has
+integer side lengths. A perfect dissection has no two triangles of the
+same side, counting up- and down-oriented triangles as different. We
+computationally prove W. T. Tutte's conjecture that the smallest
+perfect dissection has size 15 and we find all perfect dissections
+up to size 20.
+
+A copy is available freely: http://arxiv.org/abs/0910.5199
+
+
+i
+qsub-count-dissections20_all:sage runme_count_dissections.py 20 False
+qsub-count-dissections20_separated:sage runme_count_dissections.py 20
+True
+
+
+
+runme_count_dissections.py
+runme_draw_dissections.py
+runme_draw_perfect_dissections.py
+
+bbitrade.py
+count_aut_groups.py
+draw_dissections.py
+find_all_equal_tiles.py
+find_all_smaller.py
+find_max_relative_triangles.py
+find_sixway.py
+find_trivial_generators.py
+spherical.py
+triangle_dissections.py
+unique_dissections.py
+
+
+fixme Note about running export SAGE_PATH=`pwd` before doctests
+fixme README for spherical_bitrades

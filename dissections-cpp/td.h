@@ -222,14 +222,6 @@ vector<Point> reflect3_on_triangle(vector<Point> triangle)
     return result;
 }
 
-void sort_individual_triangles(vector<vector<Point> > &triangles)
-{
-    return; // FIXME why are we doing this still???
-    for(unsigned int i = 0; i < triangles.size(); i++) {
-        sort(triangles.at(i).begin(), triangles.at(i).end());
-    }
-}
-
 vector<Rational> triangle_to_12list(vector<Point> triangle)
 {
     vector< vector<Rational> > tmp;

@@ -1,0 +1,29 @@
+# size 15:
+perfect dissection: 297 5 4
+perfect dissection: 297 5 3
+16 8770
+17 27528
+perfect dissection: 2 3 0
+perfect dissection: 2 2 4
+
+#############
+
+
+
+4 1
+6 1
+7 2
+8 3
+9 5
+10 20
+11 44
+12 136
+13 317
+14 1012
+15 2835
+perfect dissection: 297 5 4
+perfect dissection: 297 5 3
+16 8770
+17 27528
+perfect dissection: 2308 3 0
+perfect dissection: 2308 2 4
