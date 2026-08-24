@@ -7,7 +7,7 @@ Discrete Applied Mathematics Volume 158, Issue 14, 28 July 2010,
 Pages 1479-1495. An open access (and more up to date version) is
 available on the arXiv: http://arxiv.org/abs/0910.5199
 
-Carlo Hamalainen <carlo.hamalainen@gmail.com>
+Carlo Hamalainen <carlo@carlo-hamalainen.net>
 
 Summary of contents
 -------------------
@@ -33,6 +33,34 @@ going to /tmp/triangles/expt_18:
 If this fails due to not being able to find the Boost C++ library, set its
 location in triangle_dissections/dissections-cpp/Makefile
 and then re-run make in the top-level directory.
+
+### Running on a Mac in 2026
+
+The Makefiles predate modern clang. Verified on macOS (Apple Silicon, clang 17)
+with Homebrew Boost:
+
+    brew install boost
+
+    # plantri needs C89 leniency (implicit int, implicit strcpy/strcmp)
+    cd spherical_bitrade_generator
+    gcc -std=gnu89 -w -O3 -include string.h -include stdlib.h \
+        '-DPLUGIN="spherical_trades_binary.c"' plantri.c -o spherical_trades_binary
+
+    # td just needs Homebrew's Boost headers
+    cd ../dissections-cpp
+    g++ -w -O3 -I/opt/homebrew/include td.cpp -o td
+
+Then a quick separated-and-nonseparated run for order N, using all 8 cores
+(no run directory needed):
+
+    N=16
+    for s in $(seq 0 7); do
+      ( ./spherical_trades_binary -b -u $((N+2)) $s/8 | ./td --separated-and-nonseparated | sort -u > sigs_${N}_$s ) &
+    done; wait
+    sort -u sigs_${N}_* | wc -l     # 19665 for N=16
+
+On an 8-core Apple Silicon Mac this takes roughly 1s for N=16, 20s for N=18
+and 70s for N=19.
 
 Now create a directory for this run of order 18 with 5 slices, and set up
 the Makefile which will run the main part of the enumeration:
@@ -75,3 +103,13 @@ there of order 18?":
 The answer should be:
 
     224708
+
+Note that this is the count of separated and nonseparated dissections
+(`td --separated-and-nonseparated`). It differs from Figure 7 of the published
+paper (224700), which undercounts nonseparated dissections for n >= 16 because
+the original code used only the set of vertex locations as a canonical
+signature; see `dissections-cpp/find_nonsep_sig_problem.*` and
+https://github.com/carlohamalainen/triangle_dissections/issues/1
+Corrected values: n=16: 19665, 17: 66051, 18: 224708, 19: 771893, 20: 2674866.
+The separated-only counts (Figure 6, `dissections-cpp/signature_counts_upto_24.txt`)
+are unaffected.

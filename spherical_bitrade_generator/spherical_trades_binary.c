@@ -1,5 +1,5 @@
 //*****************************************************************************
-//       Copyright (C) 2009 Carlo Hamalainen <carlo.hamalainen@gmail.com>,
+//       Copyright (C) 2009 Carlo Hamalainen <carlo@carlo-hamalainen.net>,
 //
 //  Distributed under the terms of the GNU General Public License (GPL)
 //
