@@ -114,21 +114,26 @@ Corrected values: n=16: 19665, 17: 66051, 18: 224708, 19: 771893, 20: 2674866.
 The separated-only counts (Figure 6, `dissections-cpp/signature_counts_upto_24.txt`)
 are unaffected.
 
-Update (August 2026): OEIS A299705 (https://oeis.org/A299705) has been
+Update (August 2026)
+--------------------
+
+[OEIS A299705]<https://oeis.org/A299705> has been
 corrected to the values above. The corrected values were obtained by two
 independent enumerators (the plantri/bitrade route and a direct canonical
 filling of the triangular grid) and then confirmed with the C++ code in
 this repo.
 
 The automorphism-group columns A(n,k) of Figure 7 were also affected for
-n >= 16. Corrected values, listed as A(n,1), A(n,2), A(n,3), A(n,6):
+n >= 16. Corrected values:
 
-    n=16: 19380, 278, 2, 5
-    n=17: 65490, 561, 0, 0
-    n=18: 223630, 1073, 0, 5
-    n=19: 769875, 2001, 8, 9
-    n=20: 2670849, 4017, 0, 0
+| n  | A(n,1)    | A(n,2) | A(n,3) | A(n,6) |
+|---:|----------:|-------:|-------:|-------:|
+| 16 |    19,380 |    278 |      2 |      5 |
+| 17 |    65,490 |    561 |      0 |      0 |
+| 18 |   223,630 |  1,073 |      0 |      5 |
+| 19 |   769,875 |  2,001 |      8 |      9 |
+| 20 | 2,670,849 |  4,017 |      0 |      0 |
 
-The perfect dissection counts in Section 3.2 of the paper (OEIS A290653)
+The perfect dissection counts in Section 3.2 of the paper ([OEIS A290653](https://oeis.org/A290653))
 are unaffected: none of the missed dissections is perfect, so there is
 still no known nonseparated perfect dissection of size <= 20.
