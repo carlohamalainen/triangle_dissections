@@ -117,7 +117,7 @@ are unaffected.
 Update (August 2026)
 --------------------
 
-[OEIS A299705]<https://oeis.org/A299705> has been
+[OEIS A299705](https://oeis.org/A299705) has been
 corrected to the values above. The corrected values were obtained by two
 independent enumerators (the plantri/bitrade route and a direct canonical
 filling of the triangular grid) and then confirmed with the C++ code in
